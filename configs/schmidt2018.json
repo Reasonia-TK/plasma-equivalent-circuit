@@ -17,6 +17,7 @@
   "stray_c_f": 2.0e-10,
   "stray_loss_ohm": 0.5,
   "regularization": {
+    "capacitance_convention": "published-point-calibrated-differential",
     "capacitance_scale": 0.5862,
     "capacitance_voltage_v": 0.05,
     "electron_voltage_v": 0.05

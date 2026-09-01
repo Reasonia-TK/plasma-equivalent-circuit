@@ -10,6 +10,9 @@ from plasma_circuit.physics import (
     argon_rate_coefficients,
     compute_plasma_parameters,
     electron_temperature_from_particle_balance,
+    matrix_sheath_charge,
+    matrix_sheath_differential_capacitance,
+    matrix_sheath_secant_capacitance,
     regularized_electron_current,
     regularized_sheath_capacitance,
     smooth_positive,
@@ -70,3 +73,19 @@ def test_paper_density_gives_expected_bulk_elements(config: dict) -> None:
     assert plasma.bulk_resistance_ohm == pytest.approx(9.6543, rel=5e-4)
     assert plasma.electron_saturation_powered_a > plasma.ion_current_powered_a
 
+
+def test_matrix_sheath_charge_distinguishes_secant_and_differential_capacitance(
+    config: dict,
+) -> None:
+    plasma = compute_plasma_parameters(config, 1.25e15, 4.75)
+    voltage = 100.0
+    k_value = plasma.sheath_k_powered
+    step = 1.0e-3
+    numerical_derivative = (
+        matrix_sheath_charge(voltage + step, k_value)
+        - matrix_sheath_charge(voltage - step, k_value)
+    ) / (2.0 * step)
+    secant = matrix_sheath_secant_capacitance(voltage, k_value)
+    differential = matrix_sheath_differential_capacitance(voltage, k_value)
+    assert differential == pytest.approx(0.5 * secant, rel=1e-12)
+    assert numerical_derivative == pytest.approx(differential, rel=1e-10)

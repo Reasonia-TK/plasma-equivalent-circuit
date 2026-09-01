@@ -14,6 +14,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 from plasma_circuit.config import load_config
+from plasma_circuit.coupling import matching_capacitances_from_load
 from plasma_circuit.ngspice import _parse_wrdata, run_ngspice
 from plasma_circuit.physics import compute_plasma_parameters
 
@@ -39,6 +40,8 @@ SELECTED_METRICS = (
     "absorbed_power_w",
     "input_impedance_real_ohm",
     "input_impedance_imag_ohm",
+    "load_impedance_real_ohm",
+    "load_impedance_imag_ohm",
     "plasma_voltage_amplitude_v",
     "plasma_voltage_offset_v",
     "generator_current_amplitude_a",
@@ -140,6 +143,19 @@ def run_validation(
         )
         for scale in (0.5, float(config["regularization"]["capacitance_scale"]), 1.0)
     ]
+    for item in capacitance_convention:
+        load = complex(
+            item["metrics"]["load_impedance_real_ohm"],
+            item["metrics"]["load_impedance_imag_ohm"],
+        )
+        target_c1, target_c2 = matching_capacitances_from_load(
+            load,
+            float(config["frequency_hz"]),
+            float(config["match_l_h"]),
+            float(config["source_resistance_ohm"]),
+        )
+        item["analytical_match_c1_f"] = target_c1
+        item["analytical_match_c2_f"] = target_c2
     output = {
         "paper": "Schmidt, Mussenbrock, Trieschmann, PSST 27 (2018) 105017",
         "config": str(config_path),
@@ -149,6 +165,15 @@ def run_validation(
         "timestep_sensitivity": timestep,
         "regularization_sensitivity": regularization,
         "capacitance_convention_sensitivity": capacitance_convention,
+        "capacitance_audit": {
+            "matrix_sheath_charge_law": "Q=sqrt(K*Vs)",
+            "paper_secant_capacitance": "Q/Vs=sqrt(K/Vs)",
+            "physical_differential_capacitance": "dQ/dVs=0.5*sqrt(K/Vs)",
+            "ngspice_27_tag_commit": "af7ab797c2b5548a99d9bcb4c7f74556aa4ac67e",
+            "ngspice_28_tag_commit": "38ed802ba44bb42c4744e8b838e30f84b97bef08",
+            "historical_c_expression_semantics": "I=C(V)*dV/dt",
+            "public_author_netlist_found": False,
+        },
     }
     summary_output.parent.mkdir(parents=True, exist_ok=True)
     summary_output.write_text(

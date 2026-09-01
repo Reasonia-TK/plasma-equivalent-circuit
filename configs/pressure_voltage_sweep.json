@@ -1,0 +1,11 @@
+{
+  "base_config": "configs/schmidt2018.json",
+  "pressures_pa": [0.5, 1.0, 2.0, 5.0, 10.0],
+  "source_amplitudes_v": [50.0, 100.0, 150.0, 200.0],
+  "network_mode": "fixed-schmidt-network",
+  "coupling_overrides": {
+    "relaxation": 0.7,
+    "max_iterations": 24
+  },
+  "description": "Out-of-calibration pressure-voltage predictions with alpha_C fixed at the Schmidt reproduction value"
+}

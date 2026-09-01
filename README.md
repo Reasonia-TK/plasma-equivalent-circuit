@@ -17,9 +17,10 @@ uv run pytest
 uv run plasma-reproduce --config configs/schmidt2018.json --output artifacts/schmidt2018/reproduction_strict
 uv run plasma-validate --config configs/schmidt2018.json --base-summary artifacts/schmidt2018/reproduction_strict/summary.json --base-output artifacts/schmidt2018/reproduction_strict
 uv run plasma-reproduce --config configs/schmidt2018.json --optimize-matching --output artifacts/schmidt2018/matched
+uv run plasma-map --sweep configs/pressure_voltage_sweep.json --raw-output artifacts/pressure_voltage_map
 ```
 
-生成途中の netlist、波形、ログは `artifacts/` に保存されます。検証済みの集計値は `reports/data/`、図とレポートは `reports/` に保存します。結果の要約は [Schmidt2018 再現レポート](reports/Schmidt2018再現レポート.md) を参照してください。
+生成途中の netlist、波形、ログは `artifacts/` に保存されます。検証済みの集計値は `reports/data/`、図とレポートは `reports/` に保存します。結果の要約は [Schmidt2018 再現レポート](reports/Schmidt2018再現レポート.md)、係数の由来は [容量規約監査](reports/Capacitance規約監査.md)、標準点外の計算は [圧力―電源振幅予測マップ](reports/PressureVoltage予測マップ.md) を参照してください。
 
 ## 数値安定化
 
@@ -34,7 +35,7 @@ I_e,reg = I_e,sat exp(-Vplus_delta(V_s) / T_e)
 
 これにより容量は有限となり、電子電流は滑らかに `0 < I_e <= I_e,sat` を満たします。既定の `delta_C=delta_e=0.05 V` は 1 V 以上で元式との差が十分小さく、感度試験で確認します。
 
-`alpha_C=0.5862` は、論文に netlist と非線形容量の SPICE 実装規約が掲載されていないため、公開された密度・整合容量で `Im(Z_in)` を合わせて同定した唯一の再現係数です。この一点以外を使わずに、論文の電圧、各枝電流、各損失電力を検証しています。係数を 1 とする論文式の直読ケースと、`Q=C(V)V` から得られる 0.5 のケースも感度結果へ保存しています。
+`alpha_C=0.5862` は、公開された密度・整合容量で `Im(Z_in)` を合わせた標準点校正係数です。監査の結果、行列シースの物理的な微分容量は `alpha_C=0.5` であり、ngspice 27/28も現行版と同じ `I=C(V)dV/dt` 規約でした。`0.5` で再整合すると容量値は論文近傍になりますが、自己無撞着な密度と吸収電力は一致しません。このため `0.5862` を物理定数とはせず、標準点再現と範囲外予測で固定する経験係数として扱います。
 
 ## 標準点の結果
 
@@ -44,6 +45,10 @@ I_e,reg = I_e,sat exp(-Vplus_delta(V_s) / T_e)
 - `I_rf = 1.004 A`、`I_pl = 0.604 A`、`I_L = 6.659 A`、`I_stray = 6.055 A`
 - 損失は電源抵抗 `25.22 W`、整合器 `11.08 W`、寄生枝 `9.18 W`、プラズマ `4.72 W`
 - 全系電力収支残差 `0.021%`
+
+## 圧力―電源振幅予測
+
+論文の整合器を固定したまま、`0.5–10 Pa`、`50–200 V peak` の20条件を計算しました。全20条件が密度・RF周期の収束条件を満たし、計算例外は0件でした。圧力上昇に伴って固定回路の反射係数が最大 `0.896` まで悪化するため、広い運転範囲では整合器の再設計が必要です。
 
 ## 出典
 

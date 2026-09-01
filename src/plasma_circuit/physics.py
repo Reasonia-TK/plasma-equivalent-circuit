@@ -101,6 +101,31 @@ def regularized_sheath_capacitance(
     return result
 
 
+def matrix_sheath_charge(sheath_voltage_v: float, sheath_k: float) -> float:
+    """Physical matrix-sheath charge Q=sqrt(K*Vs), valid for Vs>0.
+
+    Here K=2*e*n*epsilon_0*A^2. The paper's stated capacitance sqrt(K/Vs)
+    is Q/Vs (a secant capacitance), while dQ/dVs is exactly half that value.
+    """
+    if sheath_voltage_v <= 0.0 or sheath_k <= 0.0:
+        raise ValueError("matrix-sheath voltage and K must be positive")
+    return float(np.sqrt(sheath_k * sheath_voltage_v))
+
+
+def matrix_sheath_secant_capacitance(
+    sheath_voltage_v: float, sheath_k: float
+) -> float:
+    """Return Q/V for the matrix sheath, matching the printed paper formula."""
+    return matrix_sheath_charge(sheath_voltage_v, sheath_k) / sheath_voltage_v
+
+
+def matrix_sheath_differential_capacitance(
+    sheath_voltage_v: float, sheath_k: float
+) -> float:
+    """Return dQ/dV for the physical matrix-sheath charge law."""
+    return 0.5 * matrix_sheath_secant_capacitance(sheath_voltage_v, sheath_k)
+
+
 def regularized_electron_current(
     sheath_voltage_v: np.ndarray | float,
     saturation_current_a: float,
@@ -215,4 +240,3 @@ def density_from_power_balance(
     )
     denominator = volume * n_gas * k_iz * energy_per_pair_ev * ELEMENTARY_CHARGE_C
     return float(absorbed_power_w / denominator)
-

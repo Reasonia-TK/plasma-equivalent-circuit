@@ -13,6 +13,7 @@ dependencies = [
 [project.scripts]
 plasma-reproduce = "plasma_circuit.cli:main"
 plasma-validate = "plasma_circuit.validation:main"
+plasma-map = "plasma_circuit.operating_map:main"
 
 [dependency-groups]
 dev = [

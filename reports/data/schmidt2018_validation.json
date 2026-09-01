@@ -186,6 +186,8 @@
         "absorbed_power_w": 4.725108806715468,
         "input_impedance_real_ohm": 49.58494951426849,
         "input_impedance_imag_ohm": 0.2847331224449031,
+        "load_impedance_real_ohm": 1.1275018603306082,
+        "load_impedance_imag_ohm": -53.36015509881305,
         "plasma_voltage_amplitude_v": 355.3127186565535,
         "plasma_voltage_offset_v": -244.50890032650378,
         "generator_current_amplitude_a": 1.004161159490459,
@@ -209,6 +211,8 @@
         "absorbed_power_w": 4.724684673120884,
         "input_impedance_real_ohm": 49.55349522298459,
         "input_impedance_imag_ohm": 0.396124875020026,
+        "load_impedance_real_ohm": 1.1286077626425628,
+        "load_impedance_imag_ohm": -53.35772098453108,
         "plasma_voltage_amplitude_v": 355.314618238341,
         "plasma_voltage_offset_v": -244.53311762262044,
         "generator_current_amplitude_a": 1.0044571333441694,
@@ -232,6 +236,8 @@
         "absorbed_power_w": 4.726230313321538,
         "input_impedance_real_ohm": 49.35973009989045,
         "input_impedance_imag_ohm": 0.9976293946191688,
+        "load_impedance_real_ohm": 1.1278620644329058,
+        "load_impedance_imag_ohm": -53.36400771947016,
         "plasma_voltage_amplitude_v": 355.35613770373203,
         "plasma_voltage_offset_v": -244.5988200086622,
         "generator_current_amplitude_a": 1.0063894585510953,
@@ -257,6 +263,8 @@
         "absorbed_power_w": 4.724622497532779,
         "input_impedance_real_ohm": 49.55341852254797,
         "input_impedance_imag_ohm": 0.396287135424944,
+        "load_impedance_real_ohm": 1.1286943709562653,
+        "load_impedance_imag_ohm": -53.357396014904054,
         "plasma_voltage_amplitude_v": 355.31302405163103,
         "plasma_voltage_offset_v": -244.53241857842616,
         "generator_current_amplitude_a": 1.0044561495081743,
@@ -280,6 +288,8 @@
         "absorbed_power_w": 4.724684673120884,
         "input_impedance_real_ohm": 49.55349522298459,
         "input_impedance_imag_ohm": 0.396124875020026,
+        "load_impedance_real_ohm": 1.1286077626425628,
+        "load_impedance_imag_ohm": -53.35772098453108,
         "plasma_voltage_amplitude_v": 355.314618238341,
         "plasma_voltage_offset_v": -244.53311762262044,
         "generator_current_amplitude_a": 1.0044571333441694,
@@ -303,6 +313,8 @@
         "absorbed_power_w": 4.724871715349236,
         "input_impedance_real_ohm": 49.55383100996665,
         "input_impedance_imag_ohm": 0.3948977622798588,
+        "load_impedance_real_ohm": 1.128149731410345,
+        "load_impedance_imag_ohm": -53.359472323382406,
         "plasma_voltage_amplitude_v": 355.3225959466673,
         "plasma_voltage_offset_v": -244.53530700173368,
         "generator_current_amplitude_a": 1.0044639135073565,
@@ -328,6 +340,8 @@
         "absorbed_power_w": 4.058048475663,
         "input_impedance_real_ohm": 32.32392457098849,
         "input_impedance_imag_ohm": 17.0087155833412,
+        "load_impedance_real_ohm": 1.129449844511227,
+        "load_impedance_imag_ohm": -54.028535094510296,
         "plasma_voltage_amplitude_v": 344.73861682941435,
         "plasma_voltage_offset_v": -237.02103853081772,
         "generator_current_amplitude_a": 1.1895407821809623,
@@ -340,7 +354,9 @@
         "cycle_l2_voltage": 1.0555329011962863e-05,
         "cycle_l2_current": 9.145230319223078e-05,
         "power_balance_relative_error": 3.859798144319596e-05
-      }
+      },
+      "analytical_match_c1_f": 1.544118324268178e-09,
+      "analytical_match_c2_f": 1.7691795193007961e-10
     },
     {
       "label": "capacitance_scale_0.5862",
@@ -351,6 +367,8 @@
         "absorbed_power_w": 4.733597657617901,
         "input_impedance_real_ohm": 49.67349992211493,
         "input_impedance_imag_ohm": -0.02441653472168306,
+        "load_impedance_real_ohm": 1.1291968518687185,
+        "load_impedance_imag_ohm": -53.34650240520395,
         "plasma_voltage_amplitude_v": 355.1965085519432,
         "plasma_voltage_offset_v": -244.42539273833228,
         "generator_current_amplitude_a": 1.0032481040361467,
@@ -363,7 +381,9 @@
         "cycle_l2_voltage": 1.7566627707596145e-05,
         "cycle_l2_current": 9.658378558620443e-05,
         "power_balance_relative_error": 0.0002147971192122674
-      }
+      },
+      "analytical_match_c1_f": 1.5442952889927178e-09,
+      "analytical_match_c2_f": 1.7511552107650043e-10
     },
     {
       "label": "capacitance_scale_1",
@@ -374,6 +394,8 @@
         "absorbed_power_w": 1.407606285344551,
         "input_impedance_real_ohm": 1.4445580987135818,
         "input_impedance_imag_ohm": -14.223336752520382,
+        "load_impedance_real_ohm": 1.773577784112385,
+        "load_impedance_imag_ohm": -44.97055408479566,
         "plasma_voltage_amplitude_v": 75.75007013375986,
         "plasma_voltage_offset_v": -44.663207909501004,
         "generator_current_amplitude_a": 1.8732927392029066,
@@ -386,7 +408,18 @@
         "cycle_l2_voltage": 2.3439070316529492e-05,
         "cycle_l2_current": 4.289661273877022e-05,
         "power_balance_relative_error": 2.110993863233395e-05
-      }
+      },
+      "analytical_match_c1_f": 1.2240744687911766e-09,
+      "analytical_match_c2_f": 1.5951248458453208e-10
     }
-  ]
+  ],
+  "capacitance_audit": {
+    "matrix_sheath_charge_law": "Q=sqrt(K*Vs)",
+    "paper_secant_capacitance": "Q/Vs=sqrt(K/Vs)",
+    "physical_differential_capacitance": "dQ/dVs=0.5*sqrt(K/Vs)",
+    "ngspice_27_tag_commit": "af7ab797c2b5548a99d9bcb4c7f74556aa4ac67e",
+    "ngspice_28_tag_commit": "38ed802ba44bb42c4744e8b838e30f84b97bef08",
+    "historical_c_expression_semantics": "I=C(V)*dV/dt",
+    "public_author_netlist_found": false
+  }
 }
