@@ -1,0 +1,31 @@
+[project]
+name = "plasma-circuit-reproduction"
+version = "0.1.0"
+description = "Reproduction of the Schmidt et al. global CCP and matching-network model"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "matplotlib>=3.10",
+    "numpy>=2.2",
+    "scipy>=1.15",
+]
+
+[project.scripts]
+plasma-reproduce = "plasma_circuit.cli:main"
+plasma-validate = "plasma_circuit.validation:main"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/plasma_circuit"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"

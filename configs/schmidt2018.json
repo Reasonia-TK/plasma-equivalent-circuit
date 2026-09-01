@@ -1,0 +1,47 @@
+{
+  "ngspice_path": "C:\\Spice64\\bin\\ngspice_con.exe",
+  "frequency_hz": 13560000.0,
+  "source_amplitude_v": 100.0,
+  "source_phase_deg": 90.0,
+  "source_resistance_ohm": 50.0,
+  "pressure_pa": 0.66,
+  "gas_temperature_k": 300.0,
+  "powered_area_m2": 0.01,
+  "grounded_area_m2": 0.03,
+  "bulk_length_m": 0.057,
+  "argon_mass_amu": 39.948,
+  "match_c1_f": 1.55e-9,
+  "match_c2_f": 1.75e-10,
+  "match_l_h": 1.5e-6,
+  "match_loss_ohm": 0.5,
+  "stray_c_f": 2.0e-10,
+  "stray_loss_ohm": 0.5,
+  "regularization": {
+    "capacitance_scale": 0.5862,
+    "capacitance_voltage_v": 0.05,
+    "electron_voltage_v": 0.05
+  },
+  "transient": {
+    "cycles": 300,
+    "saved_cycles": 24,
+    "samples_per_cycle": 240,
+    "reltol": 1.0e-6,
+    "abstol": 1.0e-9,
+    "vntol": 1.0e-7,
+    "timeout_s": 180
+  },
+  "coupling": {
+    "initial_density_m3": 1.25e15,
+    "relaxation": 0.45,
+    "relative_tolerance": 1.0e-3,
+    "consecutive_converged": 3,
+    "cycle_l2_tolerance": 2.0e-4,
+    "max_iterations": 18
+  },
+  "matching": {
+    "relaxation": 0.7,
+    "relative_tolerance": 2.0e-3,
+    "impedance_tolerance": 2.0e-3,
+    "max_iterations": 10
+  }
+}
