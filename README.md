@@ -18,9 +18,11 @@ uv run plasma-reproduce --config configs/schmidt2018.json --output artifacts/sch
 uv run plasma-validate --config configs/schmidt2018.json --base-summary artifacts/schmidt2018/reproduction_strict/summary.json --base-output artifacts/schmidt2018/reproduction_strict
 uv run plasma-reproduce --config configs/schmidt2018.json --optimize-matching --output artifacts/schmidt2018/matched
 uv run plasma-map --sweep configs/pressure_voltage_sweep.json --raw-output artifacts/pressure_voltage_map
+uv run plasma-esc --config configs/esc_wafer_focus_ring.json --output artifacts/esc_wafer_focus_ring/baseline
+uv run plasma-esc-sweep --sweep configs/esc_focus_capacitance_sweep.json
 ```
 
-生成途中の netlist、波形、ログは `artifacts/` に保存されます。検証済みの集計値は `reports/data/`、図とレポートは `reports/` に保存します。結果の要約は [Schmidt2018 再現レポート](reports/Schmidt2018再現レポート.md)、係数の由来は [容量規約監査](reports/Capacitance規約監査.md)、標準点外の計算は [圧力―電源振幅予測マップ](reports/PressureVoltage予測マップ.md) を参照してください。
+生成途中の netlist、波形、ログは `artifacts/` に保存されます。検証済みの集計値は `reports/data/`、図とレポートは `reports/` に保存します。結果の要約は [Schmidt2018 再現レポート](reports/Schmidt2018再現レポート.md)、係数の由来は [容量規約監査](reports/Capacitance規約監査.md)、標準点外の計算は [圧力―電源振幅予測マップ](reports/PressureVoltage予測マップ.md)、二表面ESCモデルは [Wafer―Focus Ringモデル](reports/ESC_Wafer_FocusRingモデル.md) を参照してください。
 
 ## 数値安定化
 
@@ -49,6 +51,10 @@ I_e,reg = I_e,sat exp(-Vplus_delta(V_s) / T_e)
 ## 圧力―電源振幅予測
 
 論文の整合器を固定したまま、`0.5–10 Pa`、`50–200 V peak` の20条件を計算しました。全20条件が密度・RF周期の収束条件を満たし、計算例外は0件でした。圧力上昇に伴って固定回路の反射係数が最大 `0.896` まで悪化するため、広い運転範囲では整合器の再設計が必要です。
+
+## Wafer―Focus Ring二表面ESCモデル
+
+Wafer面とFocus-ring面を異なるESC容量を介して独立電極へ接続し、それぞれの非線形シース・バルク枝を共通グローバルプラズマへ連成しました。物理的な微分容量`alpha_C=0.5`を使用し、代表条件とFocus-ring容量`90–720 pF`の感度計算はすべて収束しています。
 
 ## 出典
 

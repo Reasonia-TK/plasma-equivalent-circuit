@@ -1,0 +1,57 @@
+{
+  "ngspice_path": "C:\\Spice64\\bin\\ngspice_con.exe",
+  "frequency_hz": 13560000.0,
+  "source_ramp_cycles": 10.0,
+  "pressure_pa": 2.0,
+  "gas_temperature_k": 300.0,
+  "plasma_volume_m3": 0.00288634,
+  "grounded_area_m2": 0.2,
+  "bulk_path_length_m": 0.03,
+  "argon_mass_amu": 39.948,
+  "surfaces": {
+    "wafer": {
+      "area_m2": 0.0706858,
+      "source_amplitude_v": 100.0,
+      "source_phase_deg": 0.0,
+      "source_resistance_ohm": 50.0,
+      "series_inductance_h": 5.0e-8,
+      "coupling_capacitance_f": 2.8e-9,
+      "dielectric_loss_tangent": 0.002,
+      "leakage_resistance_ohm": 1.0e12
+    },
+    "focus_ring": {
+      "area_m2": 0.0255254,
+      "source_amplitude_v": 100.0,
+      "source_phase_deg": 0.0,
+      "source_resistance_ohm": 50.0,
+      "series_inductance_h": 5.0e-8,
+      "coupling_capacitance_f": 1.8e-10,
+      "dielectric_loss_tangent": 0.002,
+      "leakage_resistance_ohm": 1.0e12
+    }
+  },
+  "regularization": {
+    "capacitance_convention": "physical-matrix-sheath-differential",
+    "capacitance_scale": 0.5,
+    "capacitance_voltage_v": 0.05,
+    "electron_voltage_v": 0.05
+  },
+  "transient": {
+    "cycles": 240,
+    "saved_cycles": 24,
+    "samples_per_cycle": 240,
+    "reltol": 1.0e-6,
+    "abstol": 1.0e-9,
+    "vntol": 1.0e-7,
+    "timeout_s": 180
+  },
+  "coupling": {
+    "initial_density_m3": 1.0e15,
+    "relaxation": 0.5,
+    "relative_tolerance": 1.0e-3,
+    "consecutive_converged": 3,
+    "cycle_l2_tolerance": 2.0e-4,
+    "max_iterations": 20
+  },
+  "description": "Representative 300 mm wafer and dielectric focus-ring ESC model; values are design assumptions, not a calibrated reactor"
+}

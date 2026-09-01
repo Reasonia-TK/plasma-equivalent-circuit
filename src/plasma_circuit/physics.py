@@ -66,14 +66,28 @@ def electron_temperature_from_particle_balance(config: Mapping[str, float]) -> f
     area_powered = float(config["powered_area_m2"])
     area_grounded = float(config["grounded_area_m2"])
     bulk_length = float(config["bulk_length_m"])
+    return electron_temperature_from_particle_balance_geometry(
+        config,
+        plasma_volume_m3=area_powered * bulk_length,
+        loss_area_m2=area_powered + area_grounded,
+    )
+
+
+def electron_temperature_from_particle_balance_geometry(
+    config: Mapping[str, float],
+    plasma_volume_m3: float,
+    loss_area_m2: float,
+) -> float:
+    """Solve the global particle balance for arbitrary plasma geometry."""
+    if plasma_volume_m3 <= 0.0 or loss_area_m2 <= 0.0:
+        raise ValueError("plasma volume and loss area must be positive")
     argon_mass = float(config.get("argon_mass_amu", 39.948)) * ATOMIC_MASS_UNIT_KG
     n_gas = neutral_density(float(config["pressure_pa"]), float(config["gas_temperature_k"]))
-    volume = area_powered * bulk_length
 
     def residual(te_ev: float) -> float:
         k_iz = argon_rate_coefficients(te_ev)["ionization"]
         u_bohm = np.sqrt(ELEMENTARY_CHARGE_C * te_ev / argon_mass)
-        return volume * n_gas * k_iz - u_bohm * (area_powered + area_grounded)
+        return plasma_volume_m3 * n_gas * k_iz - u_bohm * loss_area_m2
 
     return float(brentq(residual, 0.2, 20.0, xtol=1e-12, rtol=1e-12))
 
@@ -220,23 +234,64 @@ def density_from_power_balance(
     mean_sheath_grounded_v: float,
 ) -> float:
     """Equation (5) of Schmidt et al., solved for electron density."""
-    if absorbed_power_w <= 0.0 or not np.isfinite(absorbed_power_w):
-        raise ValueError("absorbed power must be finite and positive")
     area_powered = float(config["powered_area_m2"])
     area_grounded = float(config["grounded_area_m2"])
     volume = area_powered * float(config["bulk_length_m"])
+    return density_from_power_balance_surfaces(
+        config,
+        electron_temperature_ev,
+        absorbed_power_w,
+        surface_areas_m2=(area_powered, area_grounded),
+        mean_sheath_voltages_v=(
+            mean_sheath_powered_v,
+            mean_sheath_grounded_v,
+        ),
+        plasma_volume_m3=volume,
+    )
+
+
+def density_from_power_balance_surfaces(
+    config: Mapping[str, float],
+    electron_temperature_ev: float,
+    absorbed_power_w: float,
+    surface_areas_m2: tuple[float, ...],
+    mean_sheath_voltages_v: tuple[float, ...],
+    plasma_volume_m3: float,
+) -> float:
+    """Global power balance for any number of independently biased surfaces."""
+    if absorbed_power_w <= 0.0 or not np.isfinite(absorbed_power_w):
+        raise ValueError("absorbed power must be finite and positive")
+    if plasma_volume_m3 <= 0.0:
+        raise ValueError("plasma volume must be positive")
+    if len(surface_areas_m2) != len(mean_sheath_voltages_v):
+        raise ValueError("surface areas and sheath voltages must have equal length")
+    if not surface_areas_m2 or any(area <= 0.0 for area in surface_areas_m2):
+        raise ValueError("surface areas must be non-empty and positive")
+    total_area = float(sum(surface_areas_m2))
     n_gas = neutral_density(float(config["pressure_pa"]), float(config["gas_temperature_k"]))
     k_iz = argon_rate_coefficients(electron_temperature_ev)["ionization"]
-    f_powered = area_powered / (area_powered + area_grounded)
-    f_grounded = 1.0 - f_powered
     collision_ev = collisional_energy_loss_ev(
         electron_temperature_ev, float(config.get("argon_mass_amu", 39.948))
+    )
+    area_weighted_ion_energy_ev = sum(
+        area / total_area
+        * (max(voltage, 0.0) + 0.5 * electron_temperature_ev)
+        for area, voltage in zip(
+            surface_areas_m2,
+            mean_sheath_voltages_v,
+            strict=True,
+        )
     )
     energy_per_pair_ev = (
         collision_ev
         + 2.0 * electron_temperature_ev
-        + f_powered * (max(mean_sheath_powered_v, 0.0) + 0.5 * electron_temperature_ev)
-        + f_grounded * (max(mean_sheath_grounded_v, 0.0) + 0.5 * electron_temperature_ev)
+        + area_weighted_ion_energy_ev
     )
-    denominator = volume * n_gas * k_iz * energy_per_pair_ev * ELEMENTARY_CHARGE_C
+    denominator = (
+        plasma_volume_m3
+        * n_gas
+        * k_iz
+        * energy_per_pair_ev
+        * ELEMENTARY_CHARGE_C
+    )
     return float(absorbed_power_w / denominator)

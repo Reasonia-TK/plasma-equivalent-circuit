@@ -9,7 +9,10 @@ import pytest
 from plasma_circuit.physics import (
     argon_rate_coefficients,
     compute_plasma_parameters,
+    density_from_power_balance,
+    density_from_power_balance_surfaces,
     electron_temperature_from_particle_balance,
+    electron_temperature_from_particle_balance_geometry,
     matrix_sheath_charge,
     matrix_sheath_differential_capacitance,
     matrix_sheath_secant_capacitance,
@@ -89,3 +92,40 @@ def test_matrix_sheath_charge_distinguishes_secant_and_differential_capacitance(
     differential = matrix_sheath_differential_capacitance(voltage, k_value)
     assert differential == pytest.approx(0.5 * secant, rel=1e-12)
     assert numerical_derivative == pytest.approx(differential, rel=1e-10)
+
+
+def test_generic_particle_balance_matches_two_surface_wrapper(config: dict) -> None:
+    expected = electron_temperature_from_particle_balance(config)
+    generic = electron_temperature_from_particle_balance_geometry(
+        config,
+        plasma_volume_m3=config["powered_area_m2"] * config["bulk_length_m"],
+        loss_area_m2=config["powered_area_m2"] + config["grounded_area_m2"],
+    )
+    assert generic == pytest.approx(expected, rel=1e-12)
+
+
+def test_multi_surface_power_balance_reduces_to_two_surface_case(config: dict) -> None:
+    temperature = 4.75
+    power = 5.0
+    powered_voltage = 250.0
+    grounded_voltage = 80.0
+    expected = density_from_power_balance(
+        config,
+        temperature,
+        power,
+        powered_voltage,
+        grounded_voltage,
+    )
+    generic = density_from_power_balance_surfaces(
+        config,
+        temperature,
+        power,
+        surface_areas_m2=(0.006, 0.004, config["grounded_area_m2"]),
+        mean_sheath_voltages_v=(
+            powered_voltage,
+            powered_voltage,
+            grounded_voltage,
+        ),
+        plasma_volume_m3=config["powered_area_m2"] * config["bulk_length_m"],
+    )
+    assert generic == pytest.approx(expected, rel=1e-12)

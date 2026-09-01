@@ -1,0 +1,238 @@
+{
+  "model": "dual-surface-electrostatic-chuck-global-model",
+  "electron_temperature_ev": 3.977430712222273,
+  "electron_density_m3": 224857752226171.47,
+  "converged": true,
+  "history": [
+    {
+      "iteration": 0,
+      "density_input_m3": 1000000000000000.0,
+      "density_target_m3": 385411082662329.7,
+      "density_output_m3": 620814853770692.4,
+      "relative_change": 0.3791851462293076,
+      "absorbed_power_w": 5.697751746380823,
+      "cycle_l2_max": 5.0564162288598046e-05
+    },
+    {
+      "iteration": 1,
+      "density_input_m3": 620814853770692.4,
+      "density_target_m3": 311246727749458.1,
+      "density_output_m3": 439575467666685.75,
+      "relative_change": 0.29193790226377253,
+      "absorbed_power_w": 4.719303140024755,
+      "cycle_l2_max": 5.947844322001343e-05
+    },
+    {
+      "iteration": 2,
+      "density_input_m3": 439575467666685.75,
+      "density_target_m3": 272478005318558.25,
+      "density_output_m3": 346084739069480.06,
+      "relative_change": 0.2126841361131107,
+      "absorbed_power_w": 4.192061941412151,
+      "cycle_l2_max": 2.6753892663038185e-06
+    },
+    {
+      "iteration": 3,
+      "density_input_m3": 346084739069480.06,
+      "density_target_m3": 252176267974444.94,
+      "density_output_m3": 295422338189669.7,
+      "relative_change": 0.1463872721346415,
+      "absorbed_power_w": 3.912866165187754,
+      "cycle_l2_max": 5.5158974280841696e-05
+    },
+    {
+      "iteration": 4,
+      "density_input_m3": 295422338189669.7,
+      "density_target_m3": 240791457765231.34,
+      "density_output_m3": 266711783521283.44,
+      "relative_change": 0.09718477906688709,
+      "absorbed_power_w": 3.755039313146595,
+      "cycle_l2_max": 2.4400246309049566e-05
+    },
+    {
+      "iteration": 5,
+      "density_input_m3": 266711783521283.44,
+      "density_target_m3": 234299938524670.34,
+      "density_output_m3": 249981108251887.72,
+      "relative_change": 0.06272941918241352,
+      "absorbed_power_w": 3.6648587517203386,
+      "cycle_l2_max": 6.493897803765185e-05
+    },
+    {
+      "iteration": 6,
+      "density_input_m3": 249981108251887.72,
+      "density_target_m3": 230586415507128.5,
+      "density_output_m3": 240087999900666.25,
+      "relative_change": 0.039575424000652504,
+      "absorbed_power_w": 3.6133808501481344,
+      "cycle_l2_max": 4.364581295490505e-05
+    },
+    {
+      "iteration": 7,
+      "density_input_m3": 240087999900666.25,
+      "density_target_m3": 228003910536854.97,
+      "density_output_m3": 233967952613865.38,
+      "relative_change": 0.02549085039374303,
+      "absorbed_power_w": 3.5768779501240435,
+      "cycle_l2_max": 4.416324939446243e-05
+    },
+    {
+      "iteration": 8,
+      "density_input_m3": 233967952613865.38,
+      "density_target_m3": 226676736695575.2,
+      "density_output_m3": 230293490984561.28,
+      "relative_change": 0.015704978345339158,
+      "absorbed_power_w": 3.5585409063693985,
+      "cycle_l2_max": 4.73867548151472e-05
+    },
+    {
+      "iteration": 9,
+      "density_input_m3": 230293490984561.28,
+      "density_target_m3": 225871776652240.84,
+      "density_output_m3": 228071918394460.88,
+      "relative_change": 0.009646701609336145,
+      "absorbed_power_w": 3.547406250925183,
+      "cycle_l2_max": 5.3603506315797605e-05
+    },
+    {
+      "iteration": 10,
+      "density_input_m3": 228071918394460.88,
+      "density_target_m3": 225675339278484.53,
+      "density_output_m3": 226870464282076.66,
+      "relative_change": 0.005267873926970038,
+      "absorbed_power_w": 3.5452368245312824,
+      "cycle_l2_max": 5.2497698227251166e-05
+    },
+    {
+      "iteration": 11,
+      "density_input_m3": 226870464282076.66,
+      "density_target_m3": 225051290463737.12,
+      "density_output_m3": 225959046631881.1,
+      "relative_change": 0.004017348195057962,
+      "absorbed_power_w": 3.535925662496863,
+      "cycle_l2_max": 5.361438411529658e-05
+    },
+    {
+      "iteration": 12,
+      "density_input_m3": 225959046631881.1,
+      "density_target_m3": 225232891316889.25,
+      "density_output_m3": 225595676802785.53,
+      "relative_change": 0.0016081225094188984,
+      "absorbed_power_w": 3.5391586447193952,
+      "cycle_l2_max": 6.433653768058836e-05
+    },
+    {
+      "iteration": 13,
+      "density_input_m3": 225595676802785.53,
+      "density_target_m3": 224804376916470.0,
+      "density_output_m3": 225199679304165.62,
+      "relative_change": 0.0017553416990613922,
+      "absorbed_power_w": 3.53257222196738,
+      "cycle_l2_max": 6.186333875203056e-05
+    },
+    {
+      "iteration": 14,
+      "density_input_m3": 225199679304165.62,
+      "density_target_m3": 224677351647009.03,
+      "density_output_m3": 224938363864004.22,
+      "relative_change": 0.0011603721682412387,
+      "absorbed_power_w": 3.5307395106951525,
+      "cycle_l2_max": 6.078088558481176e-05
+    },
+    {
+      "iteration": 15,
+      "density_input_m3": 224938363864004.22,
+      "density_target_m3": 224837264534234.1,
+      "density_output_m3": 224887808517910.7,
+      "relative_change": 0.0002247519952803452,
+      "absorbed_power_w": 3.5333623812714903,
+      "cycle_l2_max": 6.360435156711869e-05
+    },
+    {
+      "iteration": 16,
+      "density_input_m3": 224887808517910.7,
+      "density_target_m3": 224827699951461.47,
+      "density_output_m3": 224857752226171.47,
+      "relative_change": 0.0001336501606614437,
+      "absorbed_power_w": 3.5332330123680062,
+      "cycle_l2_max": 6.39567829347222e-05
+    },
+    {
+      "iteration": 17,
+      "density_input_m3": 224857752226171.47,
+      "density_target_m3": 224829752902600.8,
+      "density_output_m3": 224843752128549.1,
+      "relative_change": 6.226201891537681e-05,
+      "absorbed_power_w": 3.5332777979989816,
+      "cycle_l2_max": 6.40315877427764e-05
+    }
+  ],
+  "metrics": {
+    "absorbed_power_total_w": 3.5332777979989816,
+    "absorbed_power_wafer_port_w": 3.3108622860980996,
+    "absorbed_power_focus_port_w": 0.22241551190088207,
+    "source_delivered_total_w": 15.271861312137101,
+    "source_delivered_wafer_w": 13.796125680740149,
+    "source_delivered_focus_w": 1.4757356313969525,
+    "source_resistor_loss_total_w": 11.729473643094998,
+    "source_resistor_loss_wafer_w": 10.478588994963415,
+    "source_resistor_loss_focus_w": 1.250884648131583,
+    "dielectric_loss_total_w": 0.0050195867409904985,
+    "dielectric_loss_wafer_w": 0.0017569750020073997,
+    "dielectric_loss_focus_w": 0.0032626117389830986,
+    "mean_sheath_wafer_v": 78.42928393004702,
+    "mean_sheath_focus_v": 77.32128745502432,
+    "mean_sheath_ground_v": 39.563241353432524,
+    "input_impedance_wafer_real_ohm": 16.920301314434603,
+    "input_impedance_wafer_imag_ohm": -140.6368757575397,
+    "input_impedance_focus_real_ohm": 11.039153959388496,
+    "input_impedance_focus_imag_ohm": -450.69105224499515,
+    "electrode_voltage_wafer_amplitude_v": 93.68019726338638,
+    "electrode_voltage_focus_amplitude_v": 100.0760324571858,
+    "surface_voltage_wafer_amplitude_v": 91.00483688771666,
+    "surface_voltage_focus_amplitude_v": 85.7400245851167,
+    "surface_voltage_wafer_offset_v": -38.865073788910806,
+    "surface_voltage_focus_offset_v": -37.75872273046817,
+    "source_current_wafer_amplitude_a": 0.642158987374761,
+    "source_current_focus_amplitude_a": 0.21990532625112405,
+    "surface_current_wafer_amplitude_a": 0.6421589873749578,
+    "surface_current_focus_amplitude_a": 0.21990532625112424,
+    "surface_current_wafer_thd": 0.12800987435490394,
+    "surface_current_focus_thd": 0.1859613389895234,
+    "cycle_l2_voltage_wafer": 6.40315877427764e-05,
+    "cycle_l2_voltage_focus": 3.6688462177734694e-05,
+    "cycle_l2_current_wafer": 4.4341238531785105e-05,
+    "cycle_l2_current_focus": 5.002659205775338e-05,
+    "power_balance_relative_error": 0.0002678314200563649,
+    "harmonic_amplitudes_wafer_a": [
+      0.6421589873749578,
+      0.08047172190790917,
+      0.01635266443042479,
+      0.003735000991854635,
+      0.00023574736508046916,
+      0.00019057732929611548,
+      0.00016611143547820293,
+      0.0001327370066506713,
+      0.00017058995159471897,
+      0.0001261902585756303,
+      0.0001070504304772197,
+      0.00017597926349362147
+    ],
+    "harmonic_amplitudes_focus_a": [
+      0.21990532625112424,
+      0.0380479734287509,
+      0.013840624597881311,
+      0.005420218930458673,
+      0.0018950779457378268,
+      0.00032449210124021457,
+      7.446146922460369e-05,
+      6.114012079100243e-05,
+      6.450420915373706e-05,
+      4.739849668875883e-05,
+      5.410878038068893e-05,
+      7.05206440591841e-05
+    ]
+  },
+  "config": "configs\\esc_wafer_focus_ring.json",
+  "description": "Representative 300 mm wafer and dielectric focus-ring ESC model; values are design assumptions, not a calibrated reactor"
+}
