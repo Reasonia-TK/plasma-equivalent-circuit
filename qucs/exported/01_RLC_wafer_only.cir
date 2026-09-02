@@ -1,0 +1,17 @@
+* Qucs 26.1.0 wafer-only RLC export; original path omitted for portability.
+.INCLUDE "C:/Program Files/Qucs-S/share/qucs-s/xspice_cmlib/include/ngspice_mathfunc.inc"
+R1 _net0 _net1  50 tc1=0.0 tc2=0.0
+C1 _net2 w_feed  1N
+L1 _net1 _net2  138N
+V1 _net0 0 DC 0 SIN(0 100 13.56MEG 0 0 0) AC 100 ACPHASE 0
+
+.control
+
+tran 1.47508e-10 1.47493e-06 0
+write spice4qucs.tr1.plot v(w_feed)
+destroy all
+reset
+
+exit
+.endc
+.END

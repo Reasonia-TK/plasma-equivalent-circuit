@@ -1,0 +1,47 @@
+{
+  "ngspice_path": "C:\\Spice64\\bin\\ngspice_con.exe",
+  "frequency_hz": 13560000.0,
+  "source_amplitude_v": 100.0,
+  "source_phase_deg": 0.0,
+  "source_ramp_cycles": 10.0,
+  "source_resistance_ohm": 50.0,
+  "pressure_pa": 0.66,
+  "gas_temperature_k": 300.0,
+  "powered_area_m2": 0.01,
+  "grounded_area_m2": 0.03,
+  "bulk_length_m": 0.057,
+  "argon_mass_amu": 39.948,
+  "regularization": {
+    "capacitance_convention": "physical-differential",
+    "capacitance_scale": 0.5,
+    "capacitance_voltage_v": 0.05,
+    "electron_voltage_v": 0.05
+  },
+  "qucs_netlist": {
+    "path": "../qucs/exported/01_RLC_wafer_only.cir",
+    "interface_node": "w_feed",
+    "source_node": "_net0",
+    "source_device": "V1",
+    "required_devices": ["R1", "L1", "C1", "V1"],
+    "forbidden_devices": ["R2"],
+    "drop_include_basenames": ["ngspice_mathfunc.inc"],
+    "series_loss_resistance_ohm": 50.0
+  },
+  "transient": {
+    "cycles": 960,
+    "saved_cycles": 32,
+    "samples_per_cycle": 400,
+    "reltol": 1.0e-6,
+    "abstol": 1.0e-9,
+    "vntol": 1.0e-7,
+    "timeout_s": 180
+  },
+  "coupling": {
+    "initial_density_m3": 1.9e14,
+    "relaxation": 0.4,
+    "relative_tolerance": 0.001,
+    "consecutive_converged": 2,
+    "cycle_l2_tolerance": 0.0002,
+    "max_iterations": 12
+  }
+}

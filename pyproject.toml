@@ -20,6 +20,7 @@ plasma-esc-optimize = "plasma_circuit.esc_optimization:main"
 plasma-esc-two-zone = "plasma_circuit.esc_two_zone_cli:main"
 plasma-esc-two-zone-coupled = "plasma_circuit.esc_two_zone_coupled_cli:main"
 plasma-esc-uniformity-optimize = "plasma_circuit.esc_uniformity_optimization:main"
+plasma-qucs-one-zone = "plasma_circuit.qucs_one_zone_cli:main"
 
 [dependency-groups]
 dev = [

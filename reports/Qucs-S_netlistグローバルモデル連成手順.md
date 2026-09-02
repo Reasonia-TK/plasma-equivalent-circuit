@@ -25,6 +25,16 @@ Qucs-Sは回路図入力と外部回路の管理に使用し、反復制御、�
 
 この構成では外部回路をQucs-S上で自由に変更でき、プラズマモデルは既存の検証済み実装を再利用できる。Qucs-Sはngspiceを推奨バックエンドとしており、`.PARAM`およびパラメータ化したSPICE回路を利用できる。
 
+### 2.1 実装済みの一ゾーン最小構成
+
+本手順の最初の段階として、Wafer側だけの直列RLC回路を実装済みである。Qucs-S側の必須インターフェースはWire Label `w_feed`で、電流計測用0 V電圧源はPythonが正規化後に挿入する。このため、一ゾーン最小構成ではQucs-S回路に電流計を置かなくてもよい。
+
+```powershell
+uv run plasma-qucs-one-zone --config configs/qucs_rlc_one_zone.json --output artifacts/qucs_rlc_one_zone/self_consistent
+```
+
+実装内容、数値条件、収束結果は[Qucs-S RLC一ゾーン連成レポート](Qucs-S_RLC一ゾーンプラズマ連成.md)を参照する。以下はこの一ゾーン実装をWafer―Focus ring二ゾーンへ拡張するための設計手順である。
+
 ## 3. 全体フロー
 
 ```text
@@ -106,6 +116,8 @@ Qucs-SのWire Labelを使用して明示的に命名する。自動生成ノー�
 ### 5.3 固定する計測素子名
 
 電力計算に必要な枝へ0 V電圧源を挿入し、参照名を固定する。
+
+一ゾーン最小構成では、Pythonが`w_feed`の直後に`Vsense_surface_wafer`、電源の直後に`Vsense_generator_qucs`を自動挿入するため、Qucs-S側の計測素子は不要である。二入力・二ゾーンへ拡張してQucs-S側に複数の分岐を持たせる場合は、次のRefDesを固定する方式が有効である。
 
 ```text
 VMEAS_W_GENERATOR
