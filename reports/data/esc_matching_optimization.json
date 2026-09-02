@@ -1,0 +1,2285 @@
+{
+  "description": "Educational two-port operating-point matching exercise using analytic L-match initialization, frozen-plasma ngspice correction, and self-consistent global-model verification",
+  "base_config": "configs\\esc_wafer_focus_ring.json",
+  "optimization_config": "configs\\esc_matching_optimization.json",
+  "reference_impedance_ohm": {
+    "wafer": 50.0,
+    "focus_ring": 50.0
+  },
+  "baseline_matching_values": {
+    "wafer_series_inductance_h": 5e-08,
+    "wafer_shunt_capacitance_f": 0.0,
+    "focus_ring_series_inductance_h": 5e-08,
+    "focus_ring_shunt_capacitance_f": 0.0
+  },
+  "baseline": {
+    "model": "dual-surface-electrostatic-chuck-global-model",
+    "electron_temperature_ev": 3.977430712222273,
+    "electron_density_m3": 224623745546034.44,
+    "converged": true,
+    "history": [
+      {
+        "iteration": 0,
+        "density_input_m3": 1000000000000000.0,
+        "density_target_m3": 384729527056019.56,
+        "density_output_m3": 620265690697157.6,
+        "relative_change": 0.37973430930284235,
+        "absorbed_power_w": 5.686196462081144,
+        "cycle_l2_max": 4.529094048205296e-05
+      },
+      {
+        "iteration": 1,
+        "density_input_m3": 620265690697157.6,
+        "density_target_m3": 310914451976944.4,
+        "density_output_m3": 439146407594561.75,
+        "relative_change": 0.2920027430487473,
+        "absorbed_power_w": 4.713519750052205,
+        "cycle_l2_max": 6.023897771987541e-05
+      },
+      {
+        "iteration": 2,
+        "density_input_m3": 439146407594561.75,
+        "density_target_m3": 272265586182150.66,
+        "density_output_m3": 345780933661068.25,
+        "relative_change": 0.21260671229193429,
+        "absorbed_power_w": 4.188283472164752,
+        "cycle_l2_max": 2.9149587399433876e-06
+      },
+      {
+        "iteration": 3,
+        "density_input_m3": 345780933661068.25,
+        "density_target_m3": 251531742545238.47,
+        "density_output_m3": 294915039939791.1,
+        "relative_change": 0.14710439116095242,
+        "absorbed_power_w": 3.9024518117441276,
+        "cycle_l2_max": 3.79787611354391e-05
+      },
+      {
+        "iteration": 4,
+        "density_input_m3": 294915039939791.1,
+        "density_target_m3": 240626945293232.03,
+        "density_output_m3": 266391638723410.1,
+        "relative_change": 0.09671735026536549,
+        "absorbed_power_w": 3.7522158593723502,
+        "cycle_l2_max": 2.300864298972624e-05
+      },
+      {
+        "iteration": 5,
+        "density_input_m3": 266391638723410.1,
+        "density_target_m3": 233800112570358.12,
+        "density_output_m3": 249564410766710.78,
+        "relative_change": 0.06316725268607525,
+        "absorbed_power_w": 3.656752690995004,
+        "cycle_l2_max": 6.43787906283689e-05
+      },
+      {
+        "iteration": 6,
+        "density_input_m3": 249564410766710.78,
+        "density_target_m3": 230185067692320.38,
+        "density_output_m3": 239678953573167.97,
+        "relative_change": 0.039610845004593206,
+        "absorbed_power_w": 3.6068682969488357,
+        "cycle_l2_max": 4.4064145911805225e-05
+      },
+      {
+        "iteration": 7,
+        "density_input_m3": 239678953573167.97,
+        "density_target_m3": 227683419986577.34,
+        "density_output_m3": 233604203404697.97,
+        "relative_change": 0.025345363361725173,
+        "absorbed_power_w": 3.5716401997769536,
+        "cycle_l2_max": 4.9672436082545665e-05
+      },
+      {
+        "iteration": 8,
+        "density_input_m3": 233604203404697.97,
+        "density_target_m3": 226522242776979.4,
+        "density_output_m3": 230035971268324.7,
+        "relative_change": 0.015274691484004012,
+        "absorbed_power_w": 3.555897825930456,
+        "cycle_l2_max": 4.769170456031858e-05
+      },
+      {
+        "iteration": 9,
+        "density_input_m3": 230035971268324.7,
+        "density_target_m3": 225696614614588.97,
+        "density_output_m3": 227855963175949.72,
+        "relative_change": 0.00947681391025626,
+        "absorbed_power_w": 3.544399297976735,
+        "cycle_l2_max": 5.248334528859938e-05
+      },
+      {
+        "iteration": 10,
+        "density_input_m3": 227855963175949.72,
+        "density_target_m3": 225221161975814.94,
+        "density_output_m3": 226534731971955.6,
+        "relative_change": 0.005798536872058398,
+        "absorbed_power_w": 3.5378303154241957,
+        "cycle_l2_max": 5.2706252973394335e-05
+      },
+      {
+        "iteration": 11,
+        "density_input_m3": 226534731971955.6,
+        "density_target_m3": 225247501008513.9,
+        "density_output_m3": 225890199584480.06,
+        "relative_change": 0.0028451813188421927,
+        "absorbed_power_w": 3.5387929103714937,
+        "cycle_l2_max": 5.392877011277852e-05
+      },
+      {
+        "iteration": 12,
+        "density_input_m3": 225890199584480.06,
+        "density_target_m3": 224831917072865.38,
+        "density_output_m3": 225360437123624.44,
+        "relative_change": 0.0023452210933901122,
+        "absorbed_power_w": 3.5325280067585667,
+        "cycle_l2_max": 5.483370921418333e-05
+      },
+      {
+        "iteration": 13,
+        "density_input_m3": 225360437123624.44,
+        "density_target_m3": 224878331954701.44,
+        "density_output_m3": 225119255482384.25,
+        "relative_change": 0.0010702039999500184,
+        "absorbed_power_w": 3.533478152696553,
+        "cycle_l2_max": 5.826709521590046e-05
+      },
+      {
+        "iteration": 14,
+        "density_input_m3": 225119255482384.25,
+        "density_target_m3": 224594897930622.5,
+        "density_output_m3": 224856923858892.8,
+        "relative_change": 0.0011653006888696163,
+        "absorbed_power_w": 3.52912259092026,
+        "cycle_l2_max": 6.344568118158556e-05
+      },
+      {
+        "iteration": 15,
+        "density_input_m3": 224856923858892.8,
+        "density_target_m3": 224751160464230.28,
+        "density_output_m3": 224804035941757.34,
+        "relative_change": 0.00023520697618659118,
+        "absorbed_power_w": 3.531688537680334,
+        "cycle_l2_max": 6.559080536335696e-05
+      },
+      {
+        "iteration": 16,
+        "density_input_m3": 224804035941757.34,
+        "density_target_m3": 224513129603540.94,
+        "density_output_m3": 224658535686474.2,
+        "relative_change": 0.0006472315084274232,
+        "absorbed_power_w": 3.527968278429092,
+        "cycle_l2_max": 6.553290183373174e-05
+      },
+      {
+        "iteration": 17,
+        "density_input_m3": 224658535686474.2,
+        "density_target_m3": 224519407446539.1,
+        "density_output_m3": 224588960793121.4,
+        "relative_change": 0.00030969174235995916,
+        "absorbed_power_w": 3.5281275475041833,
+        "cycle_l2_max": 6.182184397965202e-05
+      },
+      {
+        "iteration": 18,
+        "density_input_m3": 224588960793121.4,
+        "density_target_m3": 224665128453146.4,
+        "density_output_m3": 224623745546034.44,
+        "relative_change": 0.00015488184633025213,
+        "absorbed_power_w": 3.5304476629504693,
+        "cycle_l2_max": 5.6229682523052425e-05
+      },
+      {
+        "iteration": 19,
+        "density_input_m3": 224623745546034.44,
+        "density_target_m3": 224462367944351.2,
+        "density_output_m3": 224606352496189.22,
+        "relative_change": 7.743192868117415e-05,
+        "absorbed_power_w": 3.527245326478654,
+        "cycle_l2_max": 6.601432492310685e-05
+      }
+    ],
+    "metrics": {
+      "absorbed_power_total_w": 3.527245326478654,
+      "absorbed_power_wafer_port_w": 3.306252471563518,
+      "absorbed_power_focus_port_w": 0.22099285491513596,
+      "source_delivered_total_w": 15.284393093198304,
+      "source_delivered_wafer_w": 13.806840107007163,
+      "source_delivered_focus_w": 1.477552986191141,
+      "source_resistor_loss_total_w": 11.712450197435643,
+      "source_resistor_loss_wafer_w": 10.462478406815439,
+      "source_resistor_loss_focus_w": 1.249971790620205,
+      "matching_inductor_loss_total_w": 0.033263355736202635,
+      "matching_inductor_loss_wafer_w": 0.029713436152278012,
+      "matching_inductor_loss_focus_w": 0.0035499195839246212,
+      "dielectric_loss_total_w": 0.0050145044802854645,
+      "dielectric_loss_wafer_w": 0.001754273693981384,
+      "dielectric_loss_focus_w": 0.0032602307863040803,
+      "mean_sheath_wafer_v": 78.4034176231903,
+      "mean_sheath_focus_v": 77.33146050597752,
+      "mean_sheath_ground_v": 39.559471875927365,
+      "input_impedance_wafer_real_ohm": 17.063228032234225,
+      "input_impedance_wafer_imag_ohm": -140.67821941818931,
+      "input_impedance_focus_real_ohm": 11.150394096296255,
+      "input_impedance_focus_imag_ohm": -450.7885100055402,
+      "electrode_voltage_wafer_amplitude_v": 93.63899816266458,
+      "electrode_voltage_focus_amplitude_v": 100.06413041226986,
+      "surface_voltage_wafer_amplitude_v": 90.96787179739272,
+      "surface_voltage_focus_amplitude_v": 85.73560812311806,
+      "surface_voltage_wafer_offset_v": -38.84246585653283,
+      "surface_voltage_focus_offset_v": -37.77215949467033,
+      "source_current_wafer_amplitude_a": 0.6416975275151079,
+      "source_current_focus_amplitude_a": 0.2198327763431404,
+      "surface_current_wafer_amplitude_a": 0.6416975275152883,
+      "surface_current_focus_amplitude_a": 0.21983277634313753,
+      "surface_current_wafer_thd": 0.1277000040380071,
+      "surface_current_focus_thd": 0.18591146824853566,
+      "cycle_l2_voltage_wafer": 6.601432492310685e-05,
+      "cycle_l2_voltage_focus": 4.031335309884783e-05,
+      "cycle_l2_current_wafer": 4.977018454601963e-05,
+      "cycle_l2_current_focus": 5.7180790294743714e-05,
+      "power_balance_relative_error": 0.00042001727045175947,
+      "harmonic_amplitudes_wafer_a": [
+        0.6416975275152883,
+        0.0802102170848064,
+        0.01635924233426495,
+        0.0036788636763246717,
+        0.00023490146512404955,
+        0.00016187946297397882,
+        7.959408171277199e-05,
+        4.515374578931267e-05,
+        8.380255157373437e-05,
+        3.8442465643336066e-05,
+        5.022982854027241e-05,
+        8.888104646617381e-05
+      ],
+      "harmonic_amplitudes_focus_a": [
+        0.21983277634313753,
+        0.03802965301131616,
+        0.013822356104814828,
+        0.005417691158202947,
+        0.0018779979576476708,
+        0.0003386330397933229,
+        4.157875209209091e-05,
+        2.7314630237396677e-05,
+        3.101496062606671e-05,
+        1.400865667321117e-05,
+        2.715730230039721e-05,
+        3.6334819396113516e-05
+      ]
+    },
+    "matching_objective": 1.8487156367880726,
+    "apparent_reflection_magnitude": {
+      "wafer": 0.927087690268916,
+      "focus_ring": 0.9945974317983729
+    },
+    "cycle_l2_max": 6.601432492310685e-05
+  },
+  "rounds": [
+    {
+      "round": 1,
+      "matching_values": {
+        "wafer_series_inductance_h": 1.4956521319788017e-06,
+        "wafer_shunt_capacitance_f": 5.0621124003028384e-11,
+        "focus_ring_series_inductance_h": 4.188509205943975e-06,
+        "focus_ring_shunt_capacitance_f": 5.430013939718139e-11
+      },
+      "solver": {
+        "success": false,
+        "message": "Maximum number of function evaluations has been exceeded.",
+        "function_evaluations": 48,
+        "reported_objective": 1.525012351793102,
+        "selected_best_evaluation": 48,
+        "analytic_initialization": {
+          "wafer": {
+            "measured_apparent_impedance_ohm": [
+              17.063228032234225,
+              -140.67821941818931
+            ],
+            "deembedded_load_impedance_ohm": [
+              17.063228032234225,
+              -144.9382190564571
+            ],
+            "unclamped_analytic_values": {
+              "series_inductance_h": 1.979400632884352e-06,
+              "shunt_capacitance_f": 3.261372139909391e-10
+            },
+            "status": "analytic"
+          },
+          "focus_ring": {
+            "measured_apparent_impedance_ohm": [
+              11.150394096296255,
+              -450.7885100055402
+            ],
+            "deembedded_load_impedance_ohm": [
+              11.150394096296253,
+              -455.0485096438079
+            ],
+            "unclamped_analytic_values": {
+              "series_inductance_h": 5.5852315605670424e-06,
+              "shunt_capacitance_f": 4.381659626863179e-10
+            },
+            "status": "analytic"
+          }
+        },
+        "start_source": "analytic",
+        "analytic_start_objective": 1.656341789354138,
+        "current_start_objective": 1.852398132642323,
+        "initial_values": {
+          "wafer_series_inductance_h": 1.5e-06,
+          "wafer_shunt_capacitance_f": 2.5e-10,
+          "focus_ring_series_inductance_h": 4.2e-06,
+          "focus_ring_shunt_capacitance_f": 3.35e-10
+        }
+      },
+      "evaluations": [
+        {
+          "evaluation": 0,
+          "values": {
+            "wafer_series_inductance_h": 1.5e-06,
+            "wafer_shunt_capacitance_f": 2.5e-10,
+            "focus_ring_series_inductance_h": 4.2e-06,
+            "focus_ring_shunt_capacitance_f": 3.35e-10
+          },
+          "objective": 1.656341789354138,
+          "matching_objective": 1.656341789354138,
+          "settling_penalty": 0.0,
+          "apparent_reflection_magnitude": {
+            "wafer": 0.8435162420735928,
+            "focus_ring": 0.9720196184811198
+          },
+          "apparent_impedance_ohm": {
+            "wafer": [
+              5.129664698178847,
+              -22.7388584091595
+            ],
+            "focus_ring": [
+              0.9451035803873711,
+              -28.81420941901474
+            ]
+          },
+          "cycle_l2_max": 6.648421460607967e-05
+        },
+        {
+          "evaluation": 1,
+          "values": {
+            "wafer_series_inductance_h": 1e-07,
+            "wafer_shunt_capacitance_f": 5e-11,
+            "focus_ring_series_inductance_h": 5e-07,
+            "focus_ring_shunt_capacitance_f": 5e-11
+          },
+          "objective": 1.852398132642323,
+          "matching_objective": 1.852398132642323,
+          "settling_penalty": 0.0,
+          "apparent_reflection_magnitude": {
+            "wafer": 0.9349633624664002,
+            "focus_ring": 0.9890609907825935
+          },
+          "apparent_impedance_ohm": {
+            "wafer": [
+              6.682384554890643,
+              -86.06542208150786
+            ],
+            "focus_ring": [
+              2.7357899969840433,
+              -149.55254730432932
+            ]
+          },
+          "cycle_l2_max": 2.469909987795418e-05
+        },
+        {
+          "evaluation": 2,
+          "values": {
+            "wafer_series_inductance_h": 1.5e-06,
+            "wafer_shunt_capacitance_f": 2.5e-10,
+            "focus_ring_series_inductance_h": 4.2e-06,
+            "focus_ring_shunt_capacitance_f": 3.35e-10
+          },
+          "objective": 1.656341789354138,
+          "matching_objective": 1.656341789354138,
+          "settling_penalty": 0.0,
+          "apparent_reflection_magnitude": {
+            "wafer": 0.8435162420735928,
+            "focus_ring": 0.9720196184811198
+          },
+          "apparent_impedance_ohm": {
+            "wafer": [
+              5.129664698178847,
+              -22.7388584091595
+            ],
+            "focus_ring": [
+              0.9451035803873711,
+              -28.81420941901474
+            ]
+          },
+          "cycle_l2_max": 6.648421460607967e-05
+        },
+        {
+          "evaluation": 3,
+          "values": {
+            "wafer_series_inductance_h": 6.347524157501472e-07,
+            "wafer_shunt_capacitance_f": 2.5e-10,
+            "focus_ring_series_inductance_h": 4.2e-06,
+            "focus_ring_shunt_capacitance_f": 3.35e-10
+          },
+          "objective": 1.7949388350011448,
+          "matching_objective": 1.7949388350011448,
+          "settling_penalty": 0.0,
+          "apparent_reflection_magnitude": {
+            "wafer": 0.9656065088131363,
+            "focus_ring": 0.9287318801133357
+          },
+          "apparent_impedance_ohm": {
+            "wafer": [
+              1.2133059394451144,
+              -31.090894487226397
+            ],
+            "focus_ring": [
+              2.4450164334526514,
+              -28.408059825923747
+            ]
+          },
+          "cycle_l2_max": 1.3790367044261282e-05
+        },
+        {
+          "evaluation": 4,
+          "values": {
+            "wafer_series_inductance_h": 9.652475842498528e-07,
+            "wafer_shunt_capacitance_f": 2.5e-10,
+            "focus_ring_series_inductance_h": 4.2e-06,
+            "focus_ring_shunt_capacitance_f": 3.35e-10
+          },
+          "objective": 1.761736690308975,
+          "matching_objective": 1.761736690308975,
+          "settling_penalty": 0.0,
+          "apparent_reflection_magnitude": {
+            "wafer": 0.9412204676473795,
+            "focus_ring": 0.9358636233931861
+          },
+          "apparent_impedance_ohm": {
+            "wafer": [
+              2.0008064604740694,
+              -28.33553567236062
+            ],
+            "focus_ring": [
+              2.1998649034167648,
+              -28.61453328050589
+            ]
+          },
+          "cycle_l2_max": 2.0504382707553374e-05
+        },
+        {
+          "evaluation": 5,
+          "values": {
+            "wafer_series_inductance_h": 1.1695048315002943e-06,
+            "wafer_shunt_capacitance_f": 2.5e-10,
+            "focus_ring_series_inductance_h": 4.2e-06,
+            "focus_ring_shunt_capacitance_f": 3.35e-10
+          },
+          "objective": 1.7302733796131902,
+          "matching_objective": 1.7302733796131902,
+          "settling_penalty": 0.0,
+          "apparent_reflection_magnitude": {
+            "wafer": 0.9150909993134829,
+            "focus_ring": 0.9449242523020781
+          },
+          "apparent_impedance_ohm": {
+            "wafer": [
+              2.8359124952207373,
+              -26.389241327839954
+            ],
+            "focus_ring": [
+              1.883671575973859,
+              -28.72424658729992
+            ]
+          },
+          "cycle_l2_max": 2.486913625525081e-05
+        },
+        {
+          "evaluation": 6,
+          "values": {
+            "wafer_series_inductance_h": 1.2957427527495583e-06,
+            "wafer_shunt_capacitance_f": 2.5e-10,
+            "focus_ring_series_inductance_h": 4.2e-06,
+            "focus_ring_shunt_capacitance_f": 3.35e-10
+          },
+          "objective": 1.7051275125653418,
+          "matching_objective": 1.7051275125653418,
+          "settling_penalty": 0.0,
+          "apparent_reflection_magnitude": {
+            "wafer": 0.8928288015908017,
+            "focus_ring": 0.9528820722499058
+          },
+          "apparent_impedance_ohm": {
+            "wafer": [
+              3.5455078922650234,
+              -25.06904150731612
+            ],
+            "focus_ring": [
+              1.606098238041944,
+              -28.770308667671717
+            ]
+          },
+          "cycle_l2_max": 7.458170524627523e-05
+        },
+        {
+          "evaluation": 7,
+          "values": {
+            "wafer_series_inductance_h": 1.373762078750736e-06,
+            "wafer_shunt_capacitance_f": 2.5e-10,
+            "focus_ring_series_inductance_h": 4.2e-06,
+            "focus_ring_shunt_capacitance_f": 3.35e-10
+          },
+          "objective": 1.6886672028704437,
+          "matching_objective": 1.6886672028704437,
+          "settling_penalty": 0.0,
+          "apparent_reflection_magnitude": {
+            "wafer": 0.8764168532766657,
+            "focus_ring": 0.9594585463494872
+          },
+          "apparent_impedance_ohm": {
+            "wafer": [
+              4.069592326018286,
+              -24.214864435929744
+            ],
+            "focus_ring": [
+              1.3778647340655505,
+              -28.79739786191432
+            ]
+          },
+          "cycle_l2_max": 4.328743756844577e-05
+        },
+        {
+          "evaluation": 8,
+          "values": {
+            "wafer_series_inductance_h": 1.4219806739988223e-06,
+            "wafer_shunt_capacitance_f": 2.5e-10,
+            "focus_ring_series_inductance_h": 4.2e-06,
+            "focus_ring_shunt_capacitance_f": 3.35e-10
+          },
+          "objective": 1.6766901535309802,
+          "matching_objective": 1.6766901535309802,
+          "settling_penalty": 0.0,
+          "apparent_reflection_magnitude": {
+            "wafer": 0.8647349081505397,
+            "focus_ring": 0.9638068749271598
+          },
+          "apparent_impedance_ohm": {
+            "wafer": [
+              4.444488409129313,
+              -23.662280179146983
+            ],
+            "focus_ring": [
+              1.2274788630936444,
+              -28.80486346792343
+            ]
+          },
+          "cycle_l2_max": 7.739816672065594e-05
+        },
+        {
+          "evaluation": 9,
+          "values": {
+            "wafer_series_inductance_h": 1.4517814047519138e-06,
+            "wafer_shunt_capacitance_f": 2.5e-10,
+            "focus_ring_series_inductance_h": 4.2e-06,
+            "focus_ring_shunt_capacitance_f": 3.35e-10
+          },
+          "objective": 1.6689961631977575,
+          "matching_objective": 1.6689961631977575,
+          "settling_penalty": 0.0,
+          "apparent_reflection_magnitude": {
+            "wafer": 0.8569716371845659,
+            "focus_ring": 0.9667449385742665
+          },
+          "apparent_impedance_ohm": {
+            "wafer": [
+              4.69448147470427,
+              -23.313514463711122
+            ],
+            "focus_ring": [
+              1.126199040660522,
+              -28.80838632756257
+            ]
+          },
+          "cycle_l2_max": 8.346420122995089e-05
+        },
+        {
+          "evaluation": 10,
+          "values": {
+            "wafer_series_inductance_h": 1.4701992692469085e-06,
+            "wafer_shunt_capacitance_f": 2.5e-10,
+            "focus_ring_series_inductance_h": 4.2e-06,
+            "focus_ring_shunt_capacitance_f": 3.35e-10
+          },
+          "objective": 1.6646173272755993,
+          "matching_objective": 1.6646173272755993,
+          "settling_penalty": 0.0,
+          "apparent_reflection_magnitude": {
+            "wafer": 0.8520602582841137,
+            "focus_ring": 0.968819200639835
+          },
+          "apparent_impedance_ohm": {
+            "wafer": [
+              4.852940094731225,
+              -23.098342213110524
+            ],
+            "focus_ring": [
+              1.054915537588241,
+              -28.81316232184704
+            ]
+          },
+          "cycle_l2_max": 4.069137080912174e-05
+        },
+        {
+          "evaluation": 11,
+          "values": {
+            "wafer_series_inductance_h": 1.4815821355050053e-06,
+            "wafer_shunt_capacitance_f": 2.5e-10,
+            "focus_ring_series_inductance_h": 4.2e-06,
+            "focus_ring_shunt_capacitance_f": 3.35e-10
+          },
+          "objective": 1.6614947301491683,
+          "matching_objective": 1.6614947301491683,
+          "settling_penalty": 0.0,
+          "apparent_reflection_magnitude": {
+            "wafer": 0.8488549905515953,
+            "focus_ring": 0.9700205849180827
+          },
+          "apparent_impedance_ohm": {
+            "wafer": [
+              4.956623242693175,
+              -22.961788655429586
+            ],
+            "focus_ring": [
+              1.013654364330737,
+              -28.8136943759861
+            ]
+          },
+          "cycle_l2_max": 8.38647928336033e-05
+        },
+        {
+          "evaluation": 12,
+          "values": {
+            "wafer_series_inductance_h": 1.4886171337419033e-06,
+            "wafer_shunt_capacitance_f": 2.5e-10,
+            "focus_ring_series_inductance_h": 4.2e-06,
+            "focus_ring_shunt_capacitance_f": 3.35e-10
+          },
+          "objective": 1.6599568217653182,
+          "matching_objective": 1.6599568217653182,
+          "settling_penalty": 0.0,
+          "apparent_reflection_magnitude": {
+            "wafer": 0.8469281730493088,
+            "focus_ring": 0.9709116805666096
+          },
+          "apparent_impedance_ohm": {
+            "wafer": [
+              5.018955572928524,
+              -22.879783557471125
+            ],
+            "focus_ring": [
+              0.983125128698242,
+              -28.81659580789616
+            ]
+          },
+          "cycle_l2_max": 7.526049249713363e-05
+        },
+        {
+          "evaluation": 13,
+          "values": {
+            "wafer_series_inductance_h": 1.492965001763102e-06,
+            "wafer_shunt_capacitance_f": 2.5e-10,
+            "focus_ring_series_inductance_h": 4.2e-06,
+            "focus_ring_shunt_capacitance_f": 3.35e-10
+          },
+          "objective": 1.658955993290542,
+          "matching_objective": 1.658955993290542,
+          "settling_penalty": 0.0,
+          "apparent_reflection_magnitude": {
+            "wafer": 0.8457136646158083,
+            "focus_ring": 0.9714547806113479
+          },
+          "apparent_impedance_ohm": {
+            "wafer": [
+              5.058289019413585,
+              -22.82867214157118
+            ],
+            "focus_ring": [
+              0.9645266093618249,
+              -28.818125356481097
+            ]
+          },
+          "cycle_l2_max": 3.897296232459492e-05
+        },
+        {
+          "evaluation": 14,
+          "values": {
+            "wafer_series_inductance_h": 1.4956521319788017e-06,
+            "wafer_shunt_capacitance_f": 2.5e-10,
+            "focus_ring_series_inductance_h": 4.2e-06,
+            "focus_ring_shunt_capacitance_f": 3.35e-10
+          },
+          "objective": 1.6577007613616503,
+          "matching_objective": 1.6577007613616503,
+          "settling_penalty": 0.0,
+          "apparent_reflection_magnitude": {
+            "wafer": 0.8448220593270048,
+            "focus_ring": 0.9715845045265642
+          },
+          "apparent_impedance_ohm": {
+            "wafer": [
+              5.087271656872556,
+              -22.792524381139835
+            ],
+            "focus_ring": [
+              0.9600259076077762,
+              -28.814899118390972
+            ]
+          },
+          "cycle_l2_max": 7.661639162676701e-05
+        },
+        {
+          "evaluation": 15,
+          "values": {
+            "wafer_series_inductance_h": 1.4956521319788017e-06,
+            "wafer_shunt_capacitance_f": 1.2639320225002102e-10,
+            "focus_ring_series_inductance_h": 4.2e-06,
+            "focus_ring_shunt_capacitance_f": 3.35e-10
+          },
+          "objective": 1.5951113751670856,
+          "matching_objective": 1.5951113751670856,
+          "settling_penalty": 0.0,
+          "apparent_reflection_magnitude": {
+            "wafer": 0.848232779952069,
+            "focus_ring": 0.9357416984306461
+          },
+          "apparent_impedance_ohm": {
+            "wafer": [
+              5.867647676504399,
+              -32.595932012793085
+            ],
+            "focus_ring": [
+              2.247963336071845,
+              -29.742280364683516
+            ]
+          },
+          "cycle_l2_max": 0.00010567226017110619
+        },
+        {
+          "evaluation": 16,
+          "values": {
+            "wafer_series_inductance_h": 1.4956521319788017e-06,
+            "wafer_shunt_capacitance_f": 1.7360679774997898e-10,
+            "focus_ring_series_inductance_h": 4.2e-06,
+            "focus_ring_shunt_capacitance_f": 3.35e-10
+          },
+          "objective": 1.6247073056335575,
+          "matching_objective": 1.6247073056335575,
+          "settling_penalty": 0.0,
+          "apparent_reflection_magnitude": {
+            "wafer": 0.8461261390057637,
+            "focus_ring": 0.9532984121064907
+          },
+          "apparent_impedance_ohm": {
+            "wafer": [
+              5.482170131143248,
+              -27.954482279578325
+            ],
+            "focus_ring": [
+              1.6056677601811802,
+              -29.278008307672053
+            ]
+          },
+          "cycle_l2_max": 8.408268982855108e-05
+        },
+        {
+          "evaluation": 17,
+          "values": {
+            "wafer_series_inductance_h": 1.4956521319788017e-06,
+            "wafer_shunt_capacitance_f": 9.721359549995795e-11,
+            "focus_ring_series_inductance_h": 4.2e-06,
+            "focus_ring_shunt_capacitance_f": 3.35e-10
+          },
+          "objective": 1.5716871181292014,
+          "matching_objective": 1.5716871181292014,
+          "settling_penalty": 0.0,
+          "apparent_reflection_magnitude": {
+            "wafer": 0.8495714588407735,
+            "focus_ring": 0.9219085933281896
+          },
+          "apparent_impedance_ohm": {
+            "wafer": [
+              6.233956766091433,
+              -36.31697200010985
+            ],
+            "focus_ring": [
+              2.7723438304728742,
+              -30.15718621216058
+            ]
+          },
+          "cycle_l2_max": 0.00010204522709237566
+        },
+        {
+          "evaluation": 18,
+          "values": {
+            "wafer_series_inductance_h": 1.4956521319788017e-06,
+            "wafer_shunt_capacitance_f": 7.91796067500631e-11,
+            "focus_ring_series_inductance_h": 4.2e-06,
+            "focus_ring_shunt_capacitance_f": 3.35e-10
+          },
+          "objective": 1.5545415017817956,
+          "matching_objective": 1.5545415017817956,
+          "settling_penalty": 0.0,
+          "apparent_reflection_magnitude": {
+            "wafer": 0.8499092881327758,
+            "focus_ring": 0.9122476109738155
+          },
+          "apparent_impedance_ohm": {
+            "wafer": [
+              6.558032521889775,
+              -39.05219458442964
+            ],
+            "focus_ring": [
+              3.1496845029922858,
+              -30.48128096018435
+            ]
+          },
+          "cycle_l2_max": 0.00011359732953995928
+        },
+        {
+          "evaluation": 19,
+          "values": {
+            "wafer_series_inductance_h": 1.4956521319788017e-06,
+            "wafer_shunt_capacitance_f": 6.803398874989486e-11,
+            "focus_ring_series_inductance_h": 4.2e-06,
+            "focus_ring_shunt_capacitance_f": 3.35e-10
+          },
+          "objective": 1.5436764275734838,
+          "matching_objective": 1.5436764275734838,
+          "settling_penalty": 0.0,
+          "apparent_reflection_magnitude": {
+            "wafer": 0.8500105313594699,
+            "focus_ring": 0.9061779759801467
+          },
+          "apparent_impedance_ohm": {
+            "wafer": [
+              6.802860866517591,
+              -40.94769991237913
+            ],
+            "focus_ring": [
+              3.392859113292283,
+              -30.715905822130114
+            ]
+          },
+          "cycle_l2_max": 0.00012857851212975997
+        },
+        {
+          "evaluation": 20,
+          "values": {
+            "wafer_series_inductance_h": 1.4956521319788017e-06,
+            "wafer_shunt_capacitance_f": 6.114561800016825e-11,
+            "focus_ring_series_inductance_h": 4.2e-06,
+            "focus_ring_shunt_capacitance_f": 3.35e-10
+          },
+          "objective": 1.5353750824974086,
+          "matching_objective": 1.5353750824974086,
+          "settling_penalty": 0.0,
+          "apparent_reflection_magnitude": {
+            "wafer": 0.849508823791817,
+            "focus_ring": 0.9020586681570397
+          },
+          "apparent_impedance_ohm": {
+            "wafer": [
+              7.000143904079234,
+              -42.20191188705271
+            ],
+            "focus_ring": [
+              3.5594279161509985,
+              -30.8669433116599
+            ]
+          },
+          "cycle_l2_max": 0.0001459115059033611
+        },
+        {
+          "evaluation": 21,
+          "values": {
+            "wafer_series_inductance_h": 1.4956521319788017e-06,
+            "wafer_shunt_capacitance_f": 5.688837074972661e-11,
+            "focus_ring_series_inductance_h": 4.2e-06,
+            "focus_ring_shunt_capacitance_f": 3.35e-10
+          },
+          "objective": 1.5311340058305576,
+          "matching_objective": 1.5311340058305576,
+          "settling_penalty": 0.0,
+          "apparent_reflection_magnitude": {
+            "wafer": 0.8494494851891605,
+            "focus_ring": 0.8997608448595814
+          },
+          "apparent_impedance_ohm": {
+            "wafer": [
+              7.118297488738258,
+              -43.018208220379215
+            ],
+            "focus_ring": [
+              3.654287317458056,
+              -30.97000691388569
+            ]
+          },
+          "cycle_l2_max": 0.00016318593234334404
+        },
+        {
+          "evaluation": 22,
+          "values": {
+            "wafer_series_inductance_h": 1.4956521319788017e-06,
+            "wafer_shunt_capacitance_f": 5.425724725044166e-11,
+            "focus_ring_series_inductance_h": 4.2e-06,
+            "focus_ring_shunt_capacitance_f": 3.35e-10
+          },
+          "objective": 1.5290229716062982,
+          "matching_objective": 1.5290229716062982,
+          "settling_penalty": 0.0,
+          "apparent_reflection_magnitude": {
+            "wafer": 0.8495647486580272,
+            "focus_ring": 0.8984779960822197
+          },
+          "apparent_impedance_ohm": {
+            "wafer": [
+              7.187006107841856,
+              -43.539629001421524
+            ],
+            "focus_ring": [
+              3.7082160256784102,
+              -31.0383025236678
+            ]
+          },
+          "cycle_l2_max": 0.00017062204020488992
+        },
+        {
+          "evaluation": 23,
+          "values": {
+            "wafer_series_inductance_h": 1.4956521319788017e-06,
+            "wafer_shunt_capacitance_f": 5.263112349928498e-11,
+            "focus_ring_series_inductance_h": 4.2e-06,
+            "focus_ring_shunt_capacitance_f": 3.35e-10
+          },
+          "objective": 1.5265723560575561,
+          "matching_objective": 1.5265723560575561,
+          "settling_penalty": 0.0,
+          "apparent_reflection_magnitude": {
+            "wafer": 0.8492537727487527,
+            "focus_ring": 0.8974075916380282
+          },
+          "apparent_impedance_ohm": {
+            "wafer": [
+              7.250078192360136,
+              -43.86276255153884
+            ],
+            "focus_ring": [
+              3.7520295255001566,
+              -31.075453830822262
+            ]
+          },
+          "cycle_l2_max": 0.0001570772398648073
+        },
+        {
+          "evaluation": 24,
+          "values": {
+            "wafer_series_inductance_h": 1.4956521319788017e-06,
+            "wafer_shunt_capacitance_f": 5.1626123751156677e-11,
+            "focus_ring_series_inductance_h": 4.2e-06,
+            "focus_ring_shunt_capacitance_f": 3.35e-10
+          },
+          "objective": 1.5255212745323434,
+          "matching_objective": 1.5255212745323434,
+          "settling_penalty": 0.0,
+          "apparent_reflection_magnitude": {
+            "wafer": 0.8492103557372699,
+            "focus_ring": 0.8968628915508339
+          },
+          "apparent_impedance_ohm": {
+            "wafer": [
+              7.282090988266254,
+              -44.066553291782675
+            ],
+            "focus_ring": [
+              3.774819636898365,
+              -31.101020723424813
+            ]
+          },
+          "cycle_l2_max": 0.0001594626795818753
+        },
+        {
+          "evaluation": 25,
+          "values": {
+            "wafer_series_inductance_h": 1.4956521319788017e-06,
+            "wafer_shunt_capacitance_f": 5.1004999748128314e-11,
+            "focus_ring_series_inductance_h": 4.2e-06,
+            "focus_ring_shunt_capacitance_f": 3.35e-10
+          },
+          "objective": 1.5248531851966143,
+          "matching_objective": 1.5248531851966143,
+          "settling_penalty": 0.0,
+          "apparent_reflection_magnitude": {
+            "wafer": 0.8491767410473657,
+            "focus_ring": 0.896522195855066
+          },
+          "apparent_impedance_ohm": {
+            "wafer": [
+              7.302477731911035,
+              -44.19361259443318
+            ],
+            "focus_ring": [
+              3.7890801517605532,
+              -31.116845992787056
+            ]
+          },
+          "cycle_l2_max": 0.0001689108950866098
+        },
+        {
+          "evaluation": 26,
+          "values": {
+            "wafer_series_inductance_h": 1.4956521319788017e-06,
+            "wafer_shunt_capacitance_f": 5.0621124003028384e-11,
+            "focus_ring_series_inductance_h": 4.2e-06,
+            "focus_ring_shunt_capacitance_f": 3.35e-10
+          },
+          "objective": 1.5246206636927275,
+          "matching_objective": 1.5246206636927275,
+          "settling_penalty": 0.0,
+          "apparent_reflection_magnitude": {
+            "wafer": 0.8492157510654291,
+            "focus_ring": 0.8963555498992053
+          },
+          "apparent_impedance_ohm": {
+            "wafer": [
+              7.312131825729051,
+              -44.27344399485565
+            ],
+            "focus_ring": [
+              3.796263239013952,
+              -31.12755369748362
+            ]
+          },
+          "cycle_l2_max": 0.00017704085079071766
+        },
+        {
+          "evaluation": 27,
+          "values": {
+            "wafer_series_inductance_h": 1.4956521319788017e-06,
+            "wafer_shunt_capacitance_f": 5.0621124003028384e-11,
+            "focus_ring_series_inductance_h": 1.9132742416253886e-06,
+            "focus_ring_shunt_capacitance_f": 3.35e-10
+          },
+          "objective": 1.5774807246485891,
+          "matching_objective": 1.5774807246485891,
+          "settling_penalty": 0.0,
+          "apparent_reflection_magnitude": {
+            "wafer": 0.7804177261986591,
+            "focus_ring": 0.9840878503891327
+          },
+          "apparent_impedance_ohm": {
+            "wafer": [
+              10.726401901106474,
+              -42.42265971524137
+            ],
+            "focus_ring": [
+              0.5711820195566706,
+              -32.57208207053411
+            ]
+          },
+          "cycle_l2_max": 0.0001684645620598302
+        },
+        {
+          "evaluation": 28,
+          "values": {
+            "wafer_series_inductance_h": 1.4956521319788017e-06,
+            "wafer_shunt_capacitance_f": 5.0621124003028384e-11,
+            "focus_ring_series_inductance_h": 2.7867257583746105e-06,
+            "focus_ring_shunt_capacitance_f": 3.35e-10
+          },
+          "objective": 1.5688543362363139,
+          "matching_objective": 1.5688543362363139,
+          "settling_penalty": 0.0,
+          "apparent_reflection_magnitude": {
+            "wafer": 0.7962857397801844,
+            "focus_ring": 0.9668419502995504
+          },
+          "apparent_impedance_ohm": {
+            "wafer": [
+              9.988997648941092,
+              -43.13754284531922
+            ],
+            "focus_ring": [
+              1.1858749325905198,
+              -31.88622043950294
+            ]
+          },
+          "cycle_l2_max": 0.00017129676571202138
+        },
+        {
+          "evaluation": 29,
+          "values": {
+            "wafer_series_inductance_h": 1.4956521319788017e-06,
+            "wafer_shunt_capacitance_f": 5.0621124003028384e-11,
+            "focus_ring_series_inductance_h": 3.3265484832507773e-06,
+            "focus_ring_shunt_capacitance_f": 3.35e-10
+          },
+          "objective": 1.557533940601063,
+          "matching_objective": 1.557533940601063,
+          "settling_penalty": 0.0,
+          "apparent_reflection_magnitude": {
+            "wafer": 0.8121273600928761,
+            "focus_ring": 0.947619697763633
+          },
+          "apparent_impedance_ohm": {
+            "wafer": [
+              9.211742663953588,
+              -43.65195171709681
+            ],
+            "focus_ring": [
+              1.877200274093374,
+              -31.44727150305747
+            ]
+          },
+          "cycle_l2_max": 0.0001757549723057275
+        },
+        {
+          "evaluation": 30,
+          "values": {
+            "wafer_series_inductance_h": 1.4956521319788017e-06,
+            "wafer_shunt_capacitance_f": 5.0621124003028384e-11,
+            "focus_ring_series_inductance_h": 3.6601772751238324e-06,
+            "focus_ring_shunt_capacitance_f": 3.35e-10
+          },
+          "objective": 1.5474127508889364,
+          "matching_objective": 1.5474127508889364,
+          "settling_penalty": 0.0,
+          "apparent_reflection_magnitude": {
+            "wafer": 0.824629230168888,
+            "focus_ring": 0.9313427852514903
+          },
+          "apparent_impedance_ohm": {
+            "wafer": [
+              8.579308205575181,
+              -43.94037182122639
+            ],
+            "focus_ring": [
+              2.4720795548185994,
+              -31.229638408755456
+            ]
+          },
+          "cycle_l2_max": 0.0001718307704066312
+        },
+        {
+          "evaluation": 31,
+          "values": {
+            "wafer_series_inductance_h": 1.4956521319788017e-06,
+            "wafer_shunt_capacitance_f": 5.0621124003028384e-11,
+            "focus_ring_series_inductance_h": 3.866371208126945e-06,
+            "focus_ring_shunt_capacitance_f": 3.35e-10
+          },
+          "objective": 1.539430717601788,
+          "matching_objective": 1.539430717601788,
+          "settling_penalty": 0.0,
+          "apparent_reflection_magnitude": {
+            "wafer": 0.833437105204069,
+            "focus_ring": 0.9191372635634188
+          },
+          "apparent_impedance_ohm": {
+            "wafer": [
+              8.12816221492071,
+              -44.095143675544115
+            ],
+            "focus_ring": [
+              2.925947352381992,
+              -31.140298365576186
+            ]
+          },
+          "cycle_l2_max": 0.00017166811876767537
+        },
+        {
+          "evaluation": 32,
+          "values": {
+            "wafer_series_inductance_h": 1.4956521319788017e-06,
+            "wafer_shunt_capacitance_f": 5.0621124003028384e-11,
+            "focus_ring_series_inductance_h": 3.993806066996887e-06,
+            "focus_ring_shunt_capacitance_f": 3.35e-10
+          },
+          "objective": 1.5334659498446275,
+          "matching_objective": 1.5334659498446275,
+          "settling_penalty": 0.0,
+          "apparent_reflection_magnitude": {
+            "wafer": 0.8390825038151482,
+            "focus_ring": 0.9107175751219087
+          },
+          "apparent_impedance_ohm": {
+            "wafer": [
+              7.837343888846577,
+              -44.17474430211139
+            ],
+            "focus_ring": [
+              3.2435811734008695,
+              -31.109854512582988
+            ]
+          },
+          "cycle_l2_max": 0.00017125971104243294
+        },
+        {
+          "evaluation": 33,
+          "values": {
+            "wafer_series_inductance_h": 1.4956521319788017e-06,
+            "wafer_shunt_capacitance_f": 5.0621124003028384e-11,
+            "focus_ring_series_inductance_h": 4.072565141130057e-06,
+            "focus_ring_shunt_capacitance_f": 3.35e-10
+          },
+          "objective": 1.5311350803501427,
+          "matching_objective": 1.5311350803501427,
+          "settling_penalty": 0.0,
+          "apparent_reflection_magnitude": {
+            "wafer": 0.8431924178467188,
+            "focus_ring": 0.9056277529073118
+          },
+          "apparent_impedance_ohm": {
+            "wafer": [
+              7.624811721719249,
+              -44.22197116826188
+            ],
+            "focus_ring": [
+              3.4381134735193926,
+              -31.1115314112391
+            ]
+          },
+          "cycle_l2_max": 0.00016744629153388462
+        },
+        {
+          "evaluation": 34,
+          "values": {
+            "wafer_series_inductance_h": 1.4956521319788017e-06,
+            "wafer_shunt_capacitance_f": 5.0621124003028384e-11,
+            "focus_ring_series_inductance_h": 4.1212409258668295e-06,
+            "focus_ring_shunt_capacitance_f": 3.35e-10
+          },
+          "objective": 1.5286715344107833,
+          "matching_objective": 1.5286715344107833,
+          "settling_penalty": 0.0,
+          "apparent_reflection_magnitude": {
+            "wafer": 0.8454634582196808,
+            "focus_ring": 0.9021436001136411
+          },
+          "apparent_impedance_ohm": {
+            "wafer": [
+              7.507069683244818,
+              -44.24384510352128
+            ],
+            "focus_ring": [
+              3.571982606601093,
+              -31.113643606257092
+            ]
+          },
+          "cycle_l2_max": 0.00016713945769368307
+        },
+        {
+          "evaluation": 35,
+          "values": {
+            "wafer_series_inductance_h": 1.4956521319788017e-06,
+            "wafer_shunt_capacitance_f": 5.0621124003028384e-11,
+            "focus_ring_series_inductance_h": 4.151324215263228e-06,
+            "focus_ring_shunt_capacitance_f": 3.35e-10
+          },
+          "objective": 1.5269036351942278,
+          "matching_objective": 1.5269036351942278,
+          "settling_penalty": 0.0,
+          "apparent_reflection_magnitude": {
+            "wafer": 0.8468116227841054,
+            "focus_ring": 0.8998964999998488
+          },
+          "apparent_impedance_ohm": {
+            "wafer": [
+              7.437025135615461,
+              -44.255021132352866
+            ],
+            "focus_ring": [
+              3.65868297236608,
+              -31.116211919615907
+            ]
+          },
+          "cycle_l2_max": 0.0001612414552696423
+        },
+        {
+          "evaluation": 36,
+          "values": {
+            "wafer_series_inductance_h": 1.4956521319788017e-06,
+            "wafer_shunt_capacitance_f": 5.0621124003028384e-11,
+            "focus_ring_series_inductance_h": 4.169916710603601e-06,
+            "focus_ring_shunt_capacitance_f": 3.35e-10
+          },
+          "objective": 1.5259677284468838,
+          "matching_objective": 1.5259677284468838,
+          "settling_penalty": 0.0,
+          "apparent_reflection_magnitude": {
+            "wafer": 0.8477032058326163,
+            "focus_ring": 0.8985360333720562
+          },
+          "apparent_impedance_ohm": {
+            "wafer": [
+              7.390692690190573,
+              -44.26199414340537
+            ],
+            "focus_ring": [
+              3.7114061590961565,
+              -31.11959193793709
+            ]
+          },
+          "cycle_l2_max": 0.00017803084383006038
+        },
+        {
+          "evaluation": 37,
+          "values": {
+            "wafer_series_inductance_h": 1.4956521319788017e-06,
+            "wafer_shunt_capacitance_f": 5.0621124003028384e-11,
+            "focus_ring_series_inductance_h": 4.1814075046596265e-06,
+            "focus_ring_shunt_capacitance_f": 3.35e-10
+          },
+          "objective": 1.5250260231773782,
+          "matching_objective": 1.5250260231773782,
+          "settling_penalty": 0.0,
+          "apparent_reflection_magnitude": {
+            "wafer": 0.8481386943379452,
+            "focus_ring": 0.897600567259237
+          },
+          "apparent_impedance_ohm": {
+            "wafer": [
+              7.367955761630347,
+              -44.26457962077291
+            ],
+            "focus_ring": [
+              3.747599184357199,
+              -31.120285194128098
+            ]
+          },
+          "cycle_l2_max": 0.00017207344277021363
+        },
+        {
+          "evaluation": 38,
+          "values": {
+            "wafer_series_inductance_h": 1.4956521319788017e-06,
+            "wafer_shunt_capacitance_f": 5.0621124003028384e-11,
+            "focus_ring_series_inductance_h": 4.188509205943975e-06,
+            "focus_ring_shunt_capacitance_f": 3.35e-10
+          },
+          "objective": 1.525012351793102,
+          "matching_objective": 1.525012351793102,
+          "settling_penalty": 0.0,
+          "apparent_reflection_magnitude": {
+            "wafer": 0.8485949690830416,
+            "focus_ring": 0.8971615965031349
+          },
+          "apparent_impedance_ohm": {
+            "wafer": [
+              7.344300920157167,
+              -44.26834362098449
+            ],
+            "focus_ring": [
+              3.764803401210816,
+              -31.12366331167157
+            ]
+          },
+          "cycle_l2_max": 0.0001631991417494056
+        },
+        {
+          "evaluation": 39,
+          "values": {
+            "wafer_series_inductance_h": 1.4956521319788017e-06,
+            "wafer_shunt_capacitance_f": 5.0621124003028384e-11,
+            "focus_ring_series_inductance_h": 4.188509205943975e-06,
+            "focus_ring_shunt_capacitance_f": 1.5886031320627995e-10
+          },
+          "objective": 1.5199306946774147,
+          "matching_objective": 1.5199306946774147,
+          "settling_penalty": 0.0,
+          "apparent_reflection_magnitude": {
+            "wafer": 0.7823588408903104,
+            "focus_ring": 0.9528091827633615
+          },
+          "apparent_impedance_ohm": {
+            "wafer": [
+              11.429541978056285,
+              -46.03503245081855
+            ],
+            "focus_ring": [
+              2.6353342740459924,
+              -54.30372269068965
+            ]
+          },
+          "cycle_l2_max": 8.56972997135878e-05
+        },
+        {
+          "evaluation": 40,
+          "values": {
+            "wafer_series_inductance_h": 1.4956521319788017e-06,
+            "wafer_shunt_capacitance_f": 5.0621124003028384e-11,
+            "focus_ring_series_inductance_h": 4.188509205943975e-06,
+            "focus_ring_shunt_capacitance_f": 2.2613968679372001e-10
+          },
+          "objective": 1.5263428081603507,
+          "matching_objective": 1.5263428081603507,
+          "settling_penalty": 0.0,
+          "apparent_reflection_magnitude": {
+            "wafer": 0.8176774253903702,
+            "focus_ring": 0.9261460123367838
+          },
+          "apparent_impedance_ohm": {
+            "wafer": [
+              9.29230405805662,
+              -45.74133350134833
+            ],
+            "focus_ring": [
+              3.2441442307822785,
+              -41.546766455320814
+            ]
+          },
+          "cycle_l2_max": 0.0001148842373615426
+        },
+        {
+          "evaluation": 41,
+          "values": {
+            "wafer_series_inductance_h": 1.4956521319788017e-06,
+            "wafer_shunt_capacitance_f": 5.0621124003028384e-11,
+            "focus_ring_series_inductance_h": 4.188509205943975e-06,
+            "focus_ring_shunt_capacitance_f": 1.1727937358744007e-10
+          },
+          "objective": 1.51321841361003,
+          "matching_objective": 1.51321841361003,
+          "settling_penalty": 0.0,
+          "apparent_reflection_magnitude": {
+            "wafer": 0.7534940728467483,
+            "focus_ring": 0.9723502947985613
+          },
+          "apparent_impedance_ohm": {
+            "wafer": [
+              13.17376968666819,
+              -45.875501135665864
+            ],
+            "focus_ring": [
+              1.9777201344845798,
+              -67.46376810895985
+            ]
+          },
+          "cycle_l2_max": 8.690144918298416e-05
+        },
+        {
+          "evaluation": 42,
+          "values": {
+            "wafer_series_inductance_h": 1.4956521319788017e-06,
+            "wafer_shunt_capacitance_f": 5.0621124003028384e-11,
+            "focus_ring_series_inductance_h": 4.188509205943975e-06,
+            "focus_ring_shunt_capacitance_f": 9.158093961883993e-11
+          },
+          "objective": 1.5058985457563465,
+          "matching_objective": 1.5058985457563465,
+          "settling_penalty": 0.0,
+          "apparent_reflection_magnitude": {
+            "wafer": 0.7322214070797113,
+            "focus_ring": 0.9847590348763267
+          },
+          "apparent_impedance_ohm": {
+            "wafer": [
+              14.451220321143264,
+              -45.5741645679508
+            ],
+            "focus_ring": [
+              1.352982420811723,
+              -79.42490175679256
+            ]
+          },
+          "cycle_l2_max": 0.00010163694866036618
+        },
+        {
+          "evaluation": 43,
+          "values": {
+            "wafer_series_inductance_h": 1.4956521319788017e-06,
+            "wafer_shunt_capacitance_f": 5.0621124003028384e-11,
+            "focus_ring_series_inductance_h": 4.188509205943975e-06,
+            "focus_ring_shunt_capacitance_f": 7.569843396860017e-11
+          },
+          "objective": 1.5010814996680943,
+          "matching_objective": 1.5010814996680943,
+          "settling_penalty": 0.0,
+          "apparent_reflection_magnitude": {
+            "wafer": 0.7180901434280921,
+            "focus_ring": 0.992687284888608
+          },
+          "apparent_impedance_ohm": {
+            "wafer": [
+              15.292942794600112,
+              -45.2957833998683
+            ],
+            "focus_ring": [
+              0.7672687528336946,
+              -89.18208417313593
+            ]
+          },
+          "cycle_l2_max": 9.52740287137934e-05
+        },
+        {
+          "evaluation": 44,
+          "values": {
+            "wafer_series_inductance_h": 1.4956521319788017e-06,
+            "wafer_shunt_capacitance_f": 5.0621124003028384e-11,
+            "focus_ring_series_inductance_h": 4.188509205943975e-06,
+            "focus_ring_shunt_capacitance_f": 6.588250565023975e-11
+          },
+          "objective": 1.497441424753835,
+          "matching_objective": 1.497441424753835,
+          "settling_penalty": 0.0,
+          "apparent_reflection_magnitude": {
+            "wafer": 0.7088688626060493,
+            "focus_ring": 0.9974699796893343
+          },
+          "apparent_impedance_ohm": {
+            "wafer": [
+              15.838374738794851,
+              -45.082491824052966
+            ],
+            "focus_ring": [
+              0.2992477750016313,
+              -96.50309506262056
+            ]
+          },
+          "cycle_l2_max": 9.950445289193419e-05
+        },
+        {
+          "evaluation": 45,
+          "values": {
+            "wafer_series_inductance_h": 1.4956521319788017e-06,
+            "wafer_shunt_capacitance_f": 5.0621124003028384e-11,
+            "focus_ring_series_inductance_h": 4.188509205943975e-06,
+            "focus_ring_shunt_capacitance_f": 5.981592831836042e-11
+          },
+          "objective": 1.4962751185589165,
+          "matching_objective": 1.4962751185589165,
+          "settling_penalty": 0.0,
+          "apparent_reflection_magnitude": {
+            "wafer": 0.7034310346492166,
+            "focus_ring": 1.000729682807125
+          },
+          "apparent_impedance_ohm": {
+            "wafer": [
+              16.157533636175078,
+              -44.942890642812834
+            ],
+            "focus_ring": [
+              -0.09355552968201028,
+              -101.61726107814556
+            ]
+          },
+          "cycle_l2_max": 0.00010683972387233843
+        },
+        {
+          "evaluation": 46,
+          "values": {
+            "wafer_series_inductance_h": 1.4956521319788017e-06,
+            "wafer_shunt_capacitance_f": 5.0621124003028384e-11,
+            "focus_ring_series_inductance_h": 4.188509205943975e-06,
+            "focus_ring_shunt_capacitance_f": 5.430013939718139e-11
+          },
+          "objective": 1.493090582507969,
+          "matching_objective": 1.493090582507969,
+          "settling_penalty": 0.0,
+          "apparent_reflection_magnitude": {
+            "wafer": 0.697739962849491,
+            "focus_ring": 1.0031198964983
+          },
+          "apparent_impedance_ohm": {
+            "wafer": [
+              16.49124907419646,
+              -44.79128559146888
+            ],
+            "focus_ring": [
+              -0.4333179640815784,
+              -106.81932834062364
+            ]
+          },
+          "cycle_l2_max": 8.794420479354089e-05
+        },
+        {
+          "evaluation": 47,
+          "values": {
+            "wafer_series_inductance_h": 1.4956521319788017e-06,
+            "wafer_shunt_capacitance_f": 5.0621124003028384e-11,
+            "focus_ring_series_inductance_h": 4.188509205943975e-06,
+            "focus_ring_shunt_capacitance_f": 5.640698329030165e-11
+          },
+          "objective": 1.4949737095995155,
+          "matching_objective": 1.4949737095995155,
+          "settling_penalty": 0.0,
+          "apparent_reflection_magnitude": {
+            "wafer": 0.7001453180321133,
+            "focus_ring": 1.0023822839801322
+          },
+          "apparent_impedance_ohm": {
+            "wafer": [
+              16.349952944845736,
+              -44.8552004521706
+            ],
+            "focus_ring": [
+              -0.32057557479889365,
+              -104.75014701423268
+            ]
+          },
+          "cycle_l2_max": 7.632312900842697e-05
+        },
+        {
+          "evaluation": 48,
+          "values": {
+            "wafer_series_inductance_h": 1.4956521319788017e-06,
+            "wafer_shunt_capacitance_f": 5.0621124003028384e-11,
+            "focus_ring_series_inductance_h": 4.188509205943975e-06,
+            "focus_ring_shunt_capacitance_f": 5.265763230382059e-11
+          },
+          "objective": 1.4927357716764822,
+          "matching_objective": 1.4927357716764822,
+          "settling_penalty": 0.0,
+          "apparent_reflection_magnitude": {
+            "wafer": 0.6962353085330972,
+            "focus_ring": 1.0039881308204321
+          },
+          "apparent_impedance_ohm": {
+            "wafer": [
+              16.578661058023282,
+              -44.74810739658201
+            ],
+            "focus_ring": [
+              -0.5676412415619693,
+              -108.44990393323704
+            ]
+          },
+          "cycle_l2_max": 0.00010167595017508533
+        },
+        {
+          "evaluation": 49,
+          "values": {
+            "wafer_series_inductance_h": 1.4956521319788017e-06,
+            "wafer_shunt_capacitance_f": 5.0621124003028384e-11,
+            "focus_ring_series_inductance_h": 4.188509205943975e-06,
+            "focus_ring_shunt_capacitance_f": 5.313263649163468e-11
+          },
+          "objective": 1.494007371928776,
+          "matching_objective": 1.494007371928776,
+          "settling_penalty": 0.0,
+          "apparent_reflection_magnitude": {
+            "wafer": 0.6970672872263398,
+            "focus_ring": 1.0040441071027146
+          },
+          "apparent_impedance_ohm": {
+            "wafer": [
+              16.529462399827885,
+              -44.76954394013637
+            ],
+            "focus_ring": [
+              -0.5710854934690099,
+              -107.93381918834444
+            ]
+          },
+          "cycle_l2_max": 8.565997440472969e-05
+        }
+      ],
+      "verification_attempts": [
+        {
+          "frozen_evaluation": 48,
+          "frozen_objective": 1.4927357716764822,
+          "matching_values": {
+            "wafer_series_inductance_h": 1.4956521319788017e-06,
+            "wafer_shunt_capacitance_f": 5.0621124003028384e-11,
+            "focus_ring_series_inductance_h": 4.188509205943975e-06,
+            "focus_ring_shunt_capacitance_f": 5.265763230382059e-11
+          },
+          "converged": false,
+          "density_iterations": 30
+        },
+        {
+          "frozen_evaluation": 46,
+          "frozen_objective": 1.493090582507969,
+          "matching_values": {
+            "wafer_series_inductance_h": 1.4956521319788017e-06,
+            "wafer_shunt_capacitance_f": 5.0621124003028384e-11,
+            "focus_ring_series_inductance_h": 4.188509205943975e-06,
+            "focus_ring_shunt_capacitance_f": 5.430013939718139e-11
+          },
+          "converged": true,
+          "density_iterations": 22
+        }
+      ],
+      "selected_frozen_evaluation": 46,
+      "coupled_verification": {
+        "model": "dual-surface-electrostatic-chuck-global-model",
+        "electron_temperature_ev": 3.977430712222273,
+        "electron_density_m3": 706483731972412.9,
+        "converged": true,
+        "history": [
+          {
+            "iteration": 0,
+            "density_input_m3": 224623745546034.44,
+            "density_target_m3": 439883861020733.8,
+            "density_output_m3": 314337971724270.56,
+            "relative_change": 0.39939778388144664,
+            "absorbed_power_w": 9.000547247505922,
+            "cycle_l2_max": 6.358049604780189e-06
+          },
+          {
+            "iteration": 1,
+            "density_input_m3": 314337971724270.56,
+            "density_target_m3": 513500833252718.2,
+            "density_output_m3": 401762131619423.94,
+            "relative_change": 0.2781215371964023,
+            "absorbed_power_w": 10.777670316838966,
+            "cycle_l2_max": 3.114683629133301e-05
+          },
+          {
+            "iteration": 2,
+            "density_input_m3": 401762131619423.94,
+            "density_target_m3": 575315605800418.5,
+            "density_output_m3": 480770240489461.44,
+            "relative_change": 0.19665394683060694,
+            "absorbed_power_w": 12.119689553423964,
+            "cycle_l2_max": 4.475760953030636e-05
+          },
+          {
+            "iteration": 3,
+            "density_input_m3": 480770240489461.44,
+            "density_target_m3": 619944780135774.9,
+            "density_output_m3": 545940473894419.0,
+            "relative_change": 0.13555380078976853,
+            "absorbed_power_w": 12.885596735003249,
+            "cycle_l2_max": 3.42613388517579e-05
+          },
+          {
+            "iteration": 4,
+            "density_input_m3": 545940473894419.0,
+            "density_target_m3": 646725234663333.8,
+            "density_output_m3": 594199866283711.0,
+            "relative_change": 0.08839680275953496,
+            "absorbed_power_w": 13.201273868736486,
+            "cycle_l2_max": 4.285900803832208e-05
+          },
+          {
+            "iteration": 5,
+            "density_input_m3": 594199866283711.0,
+            "density_target_m3": 664670234524034.2,
+            "density_output_m3": 628448060285767.2,
+            "relative_change": 0.05763749866901494,
+            "absorbed_power_w": 13.388990586051694,
+            "cycle_l2_max": 7.732385946901721e-06
+          },
+          {
+            "iteration": 6,
+            "density_input_m3": 628448060285767.2,
+            "density_target_m3": 677644178683285.8,
+            "density_output_m3": 652582691815718.0,
+            "relative_change": 0.03840354208266038,
+            "absorbed_power_w": 13.542147215089614,
+            "cycle_l2_max": 3.643608256573307e-05
+          },
+          {
+            "iteration": 7,
+            "density_input_m3": 652582691815718.0,
+            "density_target_m3": 686047009060679.0,
+            "density_output_m3": 669105674676985.1,
+            "relative_change": 0.02531937035488068,
+            "absorbed_power_w": 13.646472460731353,
+            "cycle_l2_max": 4.749730494359583e-05
+          },
+          {
+            "iteration": 8,
+            "density_input_m3": 669105674676985.1,
+            "density_target_m3": 691887358015141.5,
+            "density_output_m3": 680401173929906.0,
+            "relative_change": 0.016881487753595645,
+            "absorbed_power_w": 13.72536272604253,
+            "cycle_l2_max": 2.4022430982228653e-05
+          },
+          {
+            "iteration": 9,
+            "density_input_m3": 680401173929906.0,
+            "density_target_m3": 697332004780877.5,
+            "density_output_m3": 688814572052452.8,
+            "relative_change": 0.012365349215892867,
+            "absorbed_power_w": 13.810553948445381,
+            "cycle_l2_max": 8.038702311100269e-06
+          },
+          {
+            "iteration": 10,
+            "density_input_m3": 688814572052452.8,
+            "density_target_m3": 700031830545756.5,
+            "density_output_m3": 694400551397008.4,
+            "relative_change": 0.008109554546604825,
+            "absorbed_power_w": 13.84868342913607,
+            "cycle_l2_max": 3.4266525410073095e-05
+          },
+          {
+            "iteration": 11,
+            "density_input_m3": 694400551397008.4,
+            "density_target_m3": 704146137492179.9,
+            "density_output_m3": 699256366534220.4,
+            "relative_change": 0.006992815785418053,
+            "absorbed_power_w": 13.920268206869991,
+            "cycle_l2_max": 2.4929356655515584e-05
+          },
+          {
+            "iteration": 12,
+            "density_input_m3": 699256366534220.4,
+            "density_target_m3": 704298276547471.0,
+            "density_output_m3": 701772793584146.1,
+            "relative_change": 0.003598718825254486,
+            "absorbed_power_w": 13.91562238050937,
+            "cycle_l2_max": 7.220007445493964e-06
+          },
+          {
+            "iteration": 13,
+            "density_input_m3": 701772793584146.1,
+            "density_target_m3": 705695531989162.5,
+            "density_output_m3": 703731429526836.2,
+            "relative_change": 0.0027909830084561047,
+            "absorbed_power_w": 13.939253632221783,
+            "cycle_l2_max": 4.448007699756024e-05
+          },
+          {
+            "iteration": 14,
+            "density_input_m3": 703731429526836.2,
+            "density_target_m3": 708179892577252.2,
+            "density_output_m3": 705952157136411.1,
+            "relative_change": 0.003155646481595987,
+            "absorbed_power_w": 13.985136567356808,
+            "cycle_l2_max": 4.5145470757858804e-05
+          },
+          {
+            "iteration": 15,
+            "density_input_m3": 705952157136411.1,
+            "density_target_m3": 707125820896018.0,
+            "density_output_m3": 706538745312952.2,
+            "relative_change": 0.0008309177479116032,
+            "absorbed_power_w": 13.961250989698822,
+            "cycle_l2_max": 4.638675477941522e-05
+          },
+          {
+            "iteration": 16,
+            "density_input_m3": 706538745312952.2,
+            "density_target_m3": 706093416526036.9,
+            "density_output_m3": 706245390324164.9,
+            "relative_change": 0.0004152001439884761,
+            "absorbed_power_w": 13.940165021841489,
+            "cycle_l2_max": 4.7002517271835074e-05
+          },
+          {
+            "iteration": 17,
+            "density_input_m3": 706245390324164.9,
+            "density_target_m3": 706646501057069.6,
+            "density_output_m3": 706392052590267.8,
+            "relative_change": 0.00020766474105488657,
+            "absorbed_power_w": 13.951430047120162,
+            "cycle_l2_max": 4.5310298279345144e-05
+          },
+          {
+            "iteration": 18,
+            "density_input_m3": 706392052590267.8,
+            "density_target_m3": 708666055502127.2,
+            "density_output_m3": 706465395144139.5,
+            "relative_change": 0.00010382698050298035,
+            "absorbed_power_w": 13.990852835944185,
+            "cycle_l2_max": 4.7004771678335265e-05
+          },
+          {
+            "iteration": 19,
+            "density_input_m3": 706465395144139.5,
+            "density_target_m3": 707126452277284.6,
+            "density_output_m3": 706502069276632.0,
+            "relative_change": 5.191214282338261e-05,
+            "absorbed_power_w": 13.960537177581333,
+            "cycle_l2_max": 4.6668981514672145e-05
+          },
+          {
+            "iteration": 20,
+            "density_input_m3": 706502069276632.0,
+            "density_target_m3": 706077986252097.2,
+            "density_output_m3": 706483731972412.9,
+            "relative_change": 2.595506087887338e-05,
+            "absorbed_power_w": 13.939913876991353,
+            "cycle_l2_max": 4.700052628767306e-05
+          },
+          {
+            "iteration": 21,
+            "density_input_m3": 706483731972412.9,
+            "density_target_m3": 707134773659717.2,
+            "density_output_m3": 706492900565028.4,
+            "relative_change": 1.2977783069261133e-05,
+            "absorbed_power_w": 13.96067459251401,
+            "cycle_l2_max": 4.6669694700709166e-05
+          }
+        ],
+        "metrics": {
+          "absorbed_power_total_w": 13.96067459251401,
+          "absorbed_power_wafer_port_w": 16.52154356899798,
+          "absorbed_power_focus_port_w": -2.560868976483971,
+          "source_delivered_total_w": 105.93363407349057,
+          "source_delivered_wafer_w": 47.02134609721363,
+          "source_delivered_focus_w": 58.91228797627694,
+          "source_resistor_loss_total_w": 80.20818319797316,
+          "source_resistor_loss_wafer_w": 27.216378130158525,
+          "source_resistor_loss_focus_w": 52.99180506781463,
+          "matching_inductor_loss_total_w": 11.686396310093976,
+          "matching_inductor_loss_wafer_w": 3.269070314998854,
+          "matching_inductor_loss_focus_w": 8.417325995095123,
+          "dielectric_loss_total_w": 0.09873369632810276,
+          "dielectric_loss_wafer_w": 0.006452200401130326,
+          "dielectric_loss_focus_w": 0.09228149592697243,
+          "mean_sheath_wafer_v": 82.95762035372408,
+          "mean_sheath_focus_v": 305.77926431677764,
+          "mean_sheath_ground_v": 49.35468517250947,
+          "input_impedance_wafer_real_ohm": 36.49684644501422,
+          "input_impedance_wafer_imag_ohm": 41.43025220400157,
+          "input_impedance_focus_real_ohm": 6.030652035039799,
+          "input_impedance_focus_imag_ohm": -40.20289957082985,
+          "electrode_voltage_wafer_amplitude_v": 113.37279542272876,
+          "electrode_voltage_focus_amplitude_v": 479.52261273070155,
+          "surface_voltage_wafer_amplitude_v": 108.32295335311768,
+          "surface_voltage_focus_amplitude_v": 402.5042194384757,
+          "surface_voltage_wafer_offset_v": -33.60293364060593,
+          "surface_voltage_focus_offset_v": -256.4254098328609,
+          "source_current_wafer_amplitude_a": 1.0427378421780138,
+          "source_current_focus_amplitude_a": 1.4501679648006396,
+          "surface_current_wafer_amplitude_a": 1.240007756687456,
+          "surface_current_focus_amplitude_a": 1.1810719191968801,
+          "surface_current_wafer_thd": 0.03270908718458451,
+          "surface_current_focus_thd": 0.12063330321922161,
+          "cycle_l2_voltage_wafer": 3.5438473609690876e-05,
+          "cycle_l2_voltage_focus": 4.015185386113531e-05,
+          "cycle_l2_current_wafer": 4.1803385535531986e-05,
+          "cycle_l2_current_focus": 4.6669694700709166e-05,
+          "power_balance_relative_error": 0.00019213655414256314,
+          "harmonic_amplitudes_wafer_a": [
+            1.240007756687456,
+            0.040547160263890894,
+            0.0006734153645245564,
+            0.0003748480852197046,
+            0.0001827408623658741,
+            0.00021397689060212964,
+            0.00024071857916322628,
+            0.00024174289583609961,
+            0.0002504314121185626,
+            0.00017384123999800125,
+            0.00017175317900363447,
+            0.00030100579861980535
+          ],
+          "harmonic_amplitudes_focus_a": [
+            1.1810719191968801,
+            0.1421681548905076,
+            0.009342468435977814,
+            0.0004676901319942794,
+            0.000323965053002102,
+            9.168057676130412e-05,
+            0.0001554767760077028,
+            6.762654204513778e-05,
+            9.733293943660066e-05,
+            0.00019577325408214296,
+            0.00016317237926095592,
+            0.00028684829624618197
+          ]
+        },
+        "matching_objective": 0.9528149938483377,
+        "apparent_reflection_magnitude": {
+          "wafer": 0.4543483956917447,
+          "focus_ring": 0.8639343315210222
+        },
+        "cycle_l2_max": 4.6669694700709166e-05
+      }
+    }
+  ],
+  "optimized_matching_values": {
+    "wafer_series_inductance_h": 1.4956521319788017e-06,
+    "wafer_shunt_capacitance_f": 5.0621124003028384e-11,
+    "focus_ring_series_inductance_h": 4.188509205943975e-06,
+    "focus_ring_shunt_capacitance_f": 5.430013939718139e-11
+  },
+  "optimized": {
+    "model": "dual-surface-electrostatic-chuck-global-model",
+    "electron_temperature_ev": 3.977430712222273,
+    "electron_density_m3": 706483731972412.9,
+    "converged": true,
+    "history": [
+      {
+        "iteration": 0,
+        "density_input_m3": 224623745546034.44,
+        "density_target_m3": 439883861020733.8,
+        "density_output_m3": 314337971724270.56,
+        "relative_change": 0.39939778388144664,
+        "absorbed_power_w": 9.000547247505922,
+        "cycle_l2_max": 6.358049604780189e-06
+      },
+      {
+        "iteration": 1,
+        "density_input_m3": 314337971724270.56,
+        "density_target_m3": 513500833252718.2,
+        "density_output_m3": 401762131619423.94,
+        "relative_change": 0.2781215371964023,
+        "absorbed_power_w": 10.777670316838966,
+        "cycle_l2_max": 3.114683629133301e-05
+      },
+      {
+        "iteration": 2,
+        "density_input_m3": 401762131619423.94,
+        "density_target_m3": 575315605800418.5,
+        "density_output_m3": 480770240489461.44,
+        "relative_change": 0.19665394683060694,
+        "absorbed_power_w": 12.119689553423964,
+        "cycle_l2_max": 4.475760953030636e-05
+      },
+      {
+        "iteration": 3,
+        "density_input_m3": 480770240489461.44,
+        "density_target_m3": 619944780135774.9,
+        "density_output_m3": 545940473894419.0,
+        "relative_change": 0.13555380078976853,
+        "absorbed_power_w": 12.885596735003249,
+        "cycle_l2_max": 3.42613388517579e-05
+      },
+      {
+        "iteration": 4,
+        "density_input_m3": 545940473894419.0,
+        "density_target_m3": 646725234663333.8,
+        "density_output_m3": 594199866283711.0,
+        "relative_change": 0.08839680275953496,
+        "absorbed_power_w": 13.201273868736486,
+        "cycle_l2_max": 4.285900803832208e-05
+      },
+      {
+        "iteration": 5,
+        "density_input_m3": 594199866283711.0,
+        "density_target_m3": 664670234524034.2,
+        "density_output_m3": 628448060285767.2,
+        "relative_change": 0.05763749866901494,
+        "absorbed_power_w": 13.388990586051694,
+        "cycle_l2_max": 7.732385946901721e-06
+      },
+      {
+        "iteration": 6,
+        "density_input_m3": 628448060285767.2,
+        "density_target_m3": 677644178683285.8,
+        "density_output_m3": 652582691815718.0,
+        "relative_change": 0.03840354208266038,
+        "absorbed_power_w": 13.542147215089614,
+        "cycle_l2_max": 3.643608256573307e-05
+      },
+      {
+        "iteration": 7,
+        "density_input_m3": 652582691815718.0,
+        "density_target_m3": 686047009060679.0,
+        "density_output_m3": 669105674676985.1,
+        "relative_change": 0.02531937035488068,
+        "absorbed_power_w": 13.646472460731353,
+        "cycle_l2_max": 4.749730494359583e-05
+      },
+      {
+        "iteration": 8,
+        "density_input_m3": 669105674676985.1,
+        "density_target_m3": 691887358015141.5,
+        "density_output_m3": 680401173929906.0,
+        "relative_change": 0.016881487753595645,
+        "absorbed_power_w": 13.72536272604253,
+        "cycle_l2_max": 2.4022430982228653e-05
+      },
+      {
+        "iteration": 9,
+        "density_input_m3": 680401173929906.0,
+        "density_target_m3": 697332004780877.5,
+        "density_output_m3": 688814572052452.8,
+        "relative_change": 0.012365349215892867,
+        "absorbed_power_w": 13.810553948445381,
+        "cycle_l2_max": 8.038702311100269e-06
+      },
+      {
+        "iteration": 10,
+        "density_input_m3": 688814572052452.8,
+        "density_target_m3": 700031830545756.5,
+        "density_output_m3": 694400551397008.4,
+        "relative_change": 0.008109554546604825,
+        "absorbed_power_w": 13.84868342913607,
+        "cycle_l2_max": 3.4266525410073095e-05
+      },
+      {
+        "iteration": 11,
+        "density_input_m3": 694400551397008.4,
+        "density_target_m3": 704146137492179.9,
+        "density_output_m3": 699256366534220.4,
+        "relative_change": 0.006992815785418053,
+        "absorbed_power_w": 13.920268206869991,
+        "cycle_l2_max": 2.4929356655515584e-05
+      },
+      {
+        "iteration": 12,
+        "density_input_m3": 699256366534220.4,
+        "density_target_m3": 704298276547471.0,
+        "density_output_m3": 701772793584146.1,
+        "relative_change": 0.003598718825254486,
+        "absorbed_power_w": 13.91562238050937,
+        "cycle_l2_max": 7.220007445493964e-06
+      },
+      {
+        "iteration": 13,
+        "density_input_m3": 701772793584146.1,
+        "density_target_m3": 705695531989162.5,
+        "density_output_m3": 703731429526836.2,
+        "relative_change": 0.0027909830084561047,
+        "absorbed_power_w": 13.939253632221783,
+        "cycle_l2_max": 4.448007699756024e-05
+      },
+      {
+        "iteration": 14,
+        "density_input_m3": 703731429526836.2,
+        "density_target_m3": 708179892577252.2,
+        "density_output_m3": 705952157136411.1,
+        "relative_change": 0.003155646481595987,
+        "absorbed_power_w": 13.985136567356808,
+        "cycle_l2_max": 4.5145470757858804e-05
+      },
+      {
+        "iteration": 15,
+        "density_input_m3": 705952157136411.1,
+        "density_target_m3": 707125820896018.0,
+        "density_output_m3": 706538745312952.2,
+        "relative_change": 0.0008309177479116032,
+        "absorbed_power_w": 13.961250989698822,
+        "cycle_l2_max": 4.638675477941522e-05
+      },
+      {
+        "iteration": 16,
+        "density_input_m3": 706538745312952.2,
+        "density_target_m3": 706093416526036.9,
+        "density_output_m3": 706245390324164.9,
+        "relative_change": 0.0004152001439884761,
+        "absorbed_power_w": 13.940165021841489,
+        "cycle_l2_max": 4.7002517271835074e-05
+      },
+      {
+        "iteration": 17,
+        "density_input_m3": 706245390324164.9,
+        "density_target_m3": 706646501057069.6,
+        "density_output_m3": 706392052590267.8,
+        "relative_change": 0.00020766474105488657,
+        "absorbed_power_w": 13.951430047120162,
+        "cycle_l2_max": 4.5310298279345144e-05
+      },
+      {
+        "iteration": 18,
+        "density_input_m3": 706392052590267.8,
+        "density_target_m3": 708666055502127.2,
+        "density_output_m3": 706465395144139.5,
+        "relative_change": 0.00010382698050298035,
+        "absorbed_power_w": 13.990852835944185,
+        "cycle_l2_max": 4.7004771678335265e-05
+      },
+      {
+        "iteration": 19,
+        "density_input_m3": 706465395144139.5,
+        "density_target_m3": 707126452277284.6,
+        "density_output_m3": 706502069276632.0,
+        "relative_change": 5.191214282338261e-05,
+        "absorbed_power_w": 13.960537177581333,
+        "cycle_l2_max": 4.6668981514672145e-05
+      },
+      {
+        "iteration": 20,
+        "density_input_m3": 706502069276632.0,
+        "density_target_m3": 706077986252097.2,
+        "density_output_m3": 706483731972412.9,
+        "relative_change": 2.595506087887338e-05,
+        "absorbed_power_w": 13.939913876991353,
+        "cycle_l2_max": 4.700052628767306e-05
+      },
+      {
+        "iteration": 21,
+        "density_input_m3": 706483731972412.9,
+        "density_target_m3": 707134773659717.2,
+        "density_output_m3": 706492900565028.4,
+        "relative_change": 1.2977783069261133e-05,
+        "absorbed_power_w": 13.96067459251401,
+        "cycle_l2_max": 4.6669694700709166e-05
+      }
+    ],
+    "metrics": {
+      "absorbed_power_total_w": 13.96067459251401,
+      "absorbed_power_wafer_port_w": 16.52154356899798,
+      "absorbed_power_focus_port_w": -2.560868976483971,
+      "source_delivered_total_w": 105.93363407349057,
+      "source_delivered_wafer_w": 47.02134609721363,
+      "source_delivered_focus_w": 58.91228797627694,
+      "source_resistor_loss_total_w": 80.20818319797316,
+      "source_resistor_loss_wafer_w": 27.216378130158525,
+      "source_resistor_loss_focus_w": 52.99180506781463,
+      "matching_inductor_loss_total_w": 11.686396310093976,
+      "matching_inductor_loss_wafer_w": 3.269070314998854,
+      "matching_inductor_loss_focus_w": 8.417325995095123,
+      "dielectric_loss_total_w": 0.09873369632810276,
+      "dielectric_loss_wafer_w": 0.006452200401130326,
+      "dielectric_loss_focus_w": 0.09228149592697243,
+      "mean_sheath_wafer_v": 82.95762035372408,
+      "mean_sheath_focus_v": 305.77926431677764,
+      "mean_sheath_ground_v": 49.35468517250947,
+      "input_impedance_wafer_real_ohm": 36.49684644501422,
+      "input_impedance_wafer_imag_ohm": 41.43025220400157,
+      "input_impedance_focus_real_ohm": 6.030652035039799,
+      "input_impedance_focus_imag_ohm": -40.20289957082985,
+      "electrode_voltage_wafer_amplitude_v": 113.37279542272876,
+      "electrode_voltage_focus_amplitude_v": 479.52261273070155,
+      "surface_voltage_wafer_amplitude_v": 108.32295335311768,
+      "surface_voltage_focus_amplitude_v": 402.5042194384757,
+      "surface_voltage_wafer_offset_v": -33.60293364060593,
+      "surface_voltage_focus_offset_v": -256.4254098328609,
+      "source_current_wafer_amplitude_a": 1.0427378421780138,
+      "source_current_focus_amplitude_a": 1.4501679648006396,
+      "surface_current_wafer_amplitude_a": 1.240007756687456,
+      "surface_current_focus_amplitude_a": 1.1810719191968801,
+      "surface_current_wafer_thd": 0.03270908718458451,
+      "surface_current_focus_thd": 0.12063330321922161,
+      "cycle_l2_voltage_wafer": 3.5438473609690876e-05,
+      "cycle_l2_voltage_focus": 4.015185386113531e-05,
+      "cycle_l2_current_wafer": 4.1803385535531986e-05,
+      "cycle_l2_current_focus": 4.6669694700709166e-05,
+      "power_balance_relative_error": 0.00019213655414256314,
+      "harmonic_amplitudes_wafer_a": [
+        1.240007756687456,
+        0.040547160263890894,
+        0.0006734153645245564,
+        0.0003748480852197046,
+        0.0001827408623658741,
+        0.00021397689060212964,
+        0.00024071857916322628,
+        0.00024174289583609961,
+        0.0002504314121185626,
+        0.00017384123999800125,
+        0.00017175317900363447,
+        0.00030100579861980535
+      ],
+      "harmonic_amplitudes_focus_a": [
+        1.1810719191968801,
+        0.1421681548905076,
+        0.009342468435977814,
+        0.0004676901319942794,
+        0.000323965053002102,
+        9.168057676130412e-05,
+        0.0001554767760077028,
+        6.762654204513778e-05,
+        9.733293943660066e-05,
+        0.00019577325408214296,
+        0.00016317237926095592,
+        0.00028684829624618197
+      ]
+    },
+    "matching_objective": 0.9528149938483377,
+    "apparent_reflection_magnitude": {
+      "wafer": 0.4543483956917447,
+      "focus_ring": 0.8639343315210222
+    },
+    "cycle_l2_max": 4.6669694700709166e-05
+  },
+  "all_coupled_runs_converged": true
+}

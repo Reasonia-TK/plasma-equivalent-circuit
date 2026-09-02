@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import copy
 import json
 import subprocess
 from dataclasses import asdict, dataclass
@@ -40,6 +41,8 @@ VECTOR_SPECS = (
     ("v_dielectric_focus", "v(f_electrode,f_feed)"),
     ("i_source_wafer", "i(Vsense_generator_wafer)"),
     ("i_source_focus", "i(Vsense_generator_focus)"),
+    ("i_match_wafer", "i(Lseries_wafer)"),
+    ("i_match_focus", "i(Lseries_focus)"),
     ("i_dielectric_wafer", "i(Vsense_dielectric_wafer)"),
     ("i_dielectric_focus", "i(Vsense_dielectric_focus)"),
     ("i_surface_wafer", "i(Vsense_surface_wafer)"),
@@ -91,6 +94,9 @@ class EscMetrics:
     source_resistor_loss_total_w: float
     source_resistor_loss_wafer_w: float
     source_resistor_loss_focus_w: float
+    matching_inductor_loss_total_w: float
+    matching_inductor_loss_wafer_w: float
+    matching_inductor_loss_focus_w: float
     dielectric_loss_total_w: float
     dielectric_loss_wafer_w: float
     dielectric_loss_focus_w: float
@@ -213,6 +219,10 @@ def load_esc_config(path: str | Path) -> dict[str, Any]:
             raise ValueError(f"{name} positive-valued fields must be positive")
         if float(surface["series_inductance_h"]) < 0.0:
             raise ValueError(f"{name} series inductance cannot be negative")
+        if float(surface.get("shunt_capacitance_f", 0.0)) < 0.0:
+            raise ValueError(f"{name} shunt capacitance cannot be negative")
+        if float(surface.get("series_inductor_quality_factor", 100.0)) <= 0.0:
+            raise ValueError(f"{name} series inductor quality factor must be positive")
         if float(surface["dielectric_loss_tangent"]) < 0.0:
             raise ValueError(f"{name} dielectric loss tangent cannot be negative")
     if not Path(config["ngspice_path"]).is_file():
@@ -322,16 +332,30 @@ def _source_and_dielectric_lines(
     loss_tangent = float(surface["dielectric_loss_tangent"])
     esr = max(loss_tangent / (2.0 * np.pi * frequency_hz * capacitance), 1.0e-9)
     inductance = float(surface["series_inductance_h"])
+    quality_factor = float(surface.get("series_inductor_quality_factor", np.inf))
+    inductor_esr = (
+        2.0 * np.pi * frequency_hz * inductance / quality_factor
+        if inductance > 0.0 and np.isfinite(quality_factor)
+        else 0.0
+    )
+    shunt_capacitance = float(surface.get("shunt_capacitance_f", 0.0))
+    shunt_element = (
+        f"Cmatch_{label} {prefix}_series_in 0 {_fmt(shunt_capacitance)}"
+        if shunt_capacitance > 0.0
+        else f"* Cmatch_{label} omitted (0 F)"
+    )
     series_element = (
-        f"Lseries_{label} {prefix}_series_in {prefix}_electrode {_fmt(inductance)}"
-        if inductance > 0.0
-        else f"Vwire_{label} {prefix}_series_in {prefix}_electrode 0"
+        f"Rmatch_{label} {prefix}_series_in {prefix}_match_inductor {_fmt(inductor_esr)}\n"
+        f"Lseries_{label} {prefix}_match_inductor {prefix}_electrode {_fmt(max(inductance, 1.0e-15))}"
+        if inductor_esr > 0.0
+        else f"Lseries_{label} {prefix}_series_in {prefix}_electrode {_fmt(max(inductance, 1.0e-15))}"
     )
     ramp_time_s = ramp_cycles / frequency_hz
     phase_rad = np.deg2rad(float(surface["source_phase_deg"]))
     return f"""Bsource_{label} {prefix}_src 0 V='{_fmt(float(surface['source_amplitude_v']))}*sin(2*pi*freq*time+{_fmt(float(phase_rad))})*tanh(time/{_fmt(ramp_time_s)})'
 Rsource_{label} {prefix}_src {prefix}_generator_sense {_fmt(float(surface['source_resistance_ohm']))}
 Vsense_generator_{label} {prefix}_generator_sense {prefix}_series_in 0
+{shunt_element}
 {series_element}
 Cesc_{label} {prefix}_electrode {prefix}_cap {_fmt(capacitance)}
 Vsense_dielectric_{label} {prefix}_cap {prefix}_loss 0
@@ -453,6 +477,16 @@ def _dielectric_esr(surface: Mapping[str, Any], frequency_hz: float) -> float:
     )
 
 
+def _matching_inductor_esr(
+    surface: Mapping[str, Any], frequency_hz: float
+) -> float:
+    inductance = float(surface["series_inductance_h"])
+    quality_factor = float(surface.get("series_inductor_quality_factor", np.inf))
+    if inductance <= 0.0 or not np.isfinite(quality_factor):
+        return 0.0
+    return 2.0 * np.pi * frequency_hz * inductance / quality_factor
+
+
 def analyze_esc_waveforms(
     config: Mapping[str, Any],
     time_s: np.ndarray,
@@ -482,6 +516,12 @@ def analyze_esc_waveforms(
     p_source_resistor_focus = mean(w["i_source_focus"] ** 2) * float(
         focus_config["source_resistance_ohm"]
     )
+    p_matching_inductor_wafer = mean(w["i_match_wafer"] ** 2) * _matching_inductor_esr(
+        wafer_config, frequency
+    )
+    p_matching_inductor_focus = mean(w["i_match_focus"] ** 2) * _matching_inductor_esr(
+        focus_config, frequency
+    )
     p_dielectric_wafer = mean(w["i_dielectric_wafer"] ** 2) * _dielectric_esr(
         wafer_config, frequency
     ) + mean(w["v_dielectric_wafer"] ** 2) / float(
@@ -496,6 +536,8 @@ def analyze_esc_waveforms(
     accounted = (
         p_source_resistor_wafer
         + p_source_resistor_focus
+        + p_matching_inductor_wafer
+        + p_matching_inductor_focus
         + p_dielectric_wafer
         + p_dielectric_focus
         + p_absorbed
@@ -537,6 +579,11 @@ def analyze_esc_waveforms(
         ),
         source_resistor_loss_wafer_w=float(p_source_resistor_wafer),
         source_resistor_loss_focus_w=float(p_source_resistor_focus),
+        matching_inductor_loss_total_w=float(
+            p_matching_inductor_wafer + p_matching_inductor_focus
+        ),
+        matching_inductor_loss_wafer_w=float(p_matching_inductor_wafer),
+        matching_inductor_loss_focus_w=float(p_matching_inductor_focus),
         dielectric_loss_total_w=float(p_dielectric_wafer + p_dielectric_focus),
         dielectric_loss_wafer_w=float(p_dielectric_wafer),
         dielectric_loss_focus_w=float(p_dielectric_focus),
@@ -665,11 +712,29 @@ def solve_esc_model(
 
     for iteration in range(max_iterations):
         plasma = compute_esc_plasma_parameters(config, density, temperature)
-        simulation = run_esc_ngspice(
-            config,
-            plasma,
-            output_directory / f"density_{iteration:02d}",
-        )
+        case_directory = output_directory / f"density_{iteration:02d}"
+        try:
+            simulation = run_esc_ngspice(config, plasma, case_directory)
+        except RuntimeError as primary_error:
+            simulation = None
+            retry_errors: list[str] = [str(primary_error)]
+            for retry_index, ramp_cycles in enumerate(
+                config.get("source_ramp_retry_cycles", [])
+            ):
+                retry_config = copy.deepcopy(config)
+                retry_config["source_ramp_cycles"] = float(ramp_cycles)
+                try:
+                    simulation = run_esc_ngspice(
+                        retry_config,
+                        plasma,
+                        output_directory
+                        / f"density_{iteration:02d}_retry_{retry_index + 1:02d}",
+                    )
+                    break
+                except RuntimeError as retry_error:
+                    retry_errors.append(str(retry_error))
+            if simulation is None:
+                raise RuntimeError("\n--- retry ---\n".join(retry_errors)) from primary_error
         metrics = simulation.metrics
         target = density_from_power_balance_surfaces(
             config,

@@ -1,0 +1,51 @@
+{
+  "base_config": "configs/esc_wafer_focus_ring.json",
+  "description": "Educational two-port operating-point matching exercise using analytic L-match initialization, frozen-plasma ngspice correction, and self-consistent global-model verification",
+  "reference_impedance_ohm": {
+    "wafer": 50.0,
+    "focus_ring": 50.0
+  },
+  "series_inductor_quality_factor": {
+    "wafer": 30.0,
+    "focus_ring": 30.0
+  },
+  "outer_rounds": 1,
+  "verification_candidates": 5,
+  "bounds": {
+    "wafer": {
+      "series_inductance_h": [1.0e-7, 1.5e-6],
+      "shunt_capacitance_f": [5.0e-11, 2.5e-10]
+    },
+    "focus_ring": {
+      "series_inductance_h": [5.0e-7, 4.2e-6],
+      "shunt_capacitance_f": [5.0e-11, 3.35e-10]
+    }
+  },
+  "frozen_source_ramp_cycles": 20.0,
+  "frozen_transient": {
+    "cycles": 280,
+    "saved_cycles": 22,
+    "samples_per_cycle": 160,
+    "timeout_s": 120
+  },
+  "settling_penalty": {
+    "cycle_l2_tolerance": 2.0e-4,
+    "weight": 0.02
+  },
+  "verification_source_ramp_cycles": 10.0,
+  "verification_source_ramp_retry_cycles": [5.0, 15.0],
+  "verification_transient": {
+    "cycles": 600,
+    "saved_cycles": 24,
+    "samples_per_cycle": 240,
+    "timeout_s": 180
+  },
+  "verification_coupling": {
+    "max_iterations": 30
+  },
+  "optimizer": {
+    "max_function_evaluations": 48,
+    "normalized_parameter_tolerance": 0.005,
+    "objective_tolerance": 0.0001
+  }
+}

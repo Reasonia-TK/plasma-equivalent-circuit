@@ -75,9 +75,29 @@ def test_esc_netlist_contains_two_dielectric_and_three_sheath_branches() -> None
     assert "Csh_ground plasma_bulk 0" in netlist
     assert "Vsense_surface_wafer w_feed wafer 0" in netlist
     assert "Vsense_surface_focus f_feed focus 0" in netlist
+    assert "Lseries_wafer w_series_in w_electrode" in netlist
     assert "Bsource_wafer w_src 0 V=" in netlist
     assert "tanh(time/" in netlist
     assert ".param cscale=5.0000000000000000e-01" in netlist
+    assert "Cmatch_wafer omitted (0 F)" in netlist
+    assert "Cmatch_focus omitted (0 F)" in netlist
+
+
+def test_esc_netlist_places_matching_capacitors_at_generator_ports() -> None:
+    config = _config()
+    config["surfaces"]["wafer"]["shunt_capacitance_f"] = 330.0e-12
+    config["surfaces"]["focus_ring"]["shunt_capacitance_f"] = 440.0e-12
+    wafer_area = config["surfaces"]["wafer"]["area_m2"]
+    focus_area = config["surfaces"]["focus_ring"]["area_m2"]
+    temperature = electron_temperature_from_particle_balance_geometry(
+        config,
+        plasma_volume_m3=config["plasma_volume_m3"],
+        loss_area_m2=wafer_area + focus_area + config["grounded_area_m2"],
+    )
+    plasma = compute_esc_plasma_parameters(config, 1.0e15, temperature)
+    netlist = render_esc_netlist(config, plasma)
+    assert "Cmatch_wafer w_series_in 0 3.3000000000000000e-10" in netlist
+    assert "Cmatch_focus f_series_in 0 4.3999999999999998e-10" in netlist
 
 
 def test_focus_capacitance_sweep_starts_at_base_value() -> None:

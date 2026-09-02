@@ -20,9 +20,10 @@ uv run plasma-reproduce --config configs/schmidt2018.json --optimize-matching --
 uv run plasma-map --sweep configs/pressure_voltage_sweep.json --raw-output artifacts/pressure_voltage_map
 uv run plasma-esc --config configs/esc_wafer_focus_ring.json --output artifacts/esc_wafer_focus_ring/baseline
 uv run plasma-esc-sweep --sweep configs/esc_focus_capacitance_sweep.json
+uv run plasma-esc-optimize --optimization configs/esc_matching_optimization.json
 ```
 
-生成途中の netlist、波形、ログは `artifacts/` に保存されます。検証済みの集計値は `reports/data/`、図とレポートは `reports/` に保存します。結果の要約は [Schmidt2018 再現レポート](reports/Schmidt2018再現レポート.md)、係数の由来は [容量規約監査](reports/Capacitance規約監査.md)、標準点外の計算は [圧力―電源振幅予測マップ](reports/PressureVoltage予測マップ.md)、二表面ESCモデルは [Wafer―Focus Ringモデル](reports/ESC_Wafer_FocusRingモデル.md) を参照してください。
+生成途中の netlist、波形、ログは `artifacts/` に保存されます。検証済みの集計値は `reports/data/`、図とレポートは `reports/` に保存します。結果の要約は [Schmidt2018 再現レポート](reports/Schmidt2018再現レポート.md)、係数の由来は [容量規約監査](reports/Capacitance規約監査.md)、標準点外の計算は [圧力―電源振幅予測マップ](reports/PressureVoltage予測マップ.md)、二表面ESCモデルは [Wafer―Focus Ringモデル](reports/ESC_Wafer_FocusRingモデル.md)、整合設計の教材は [二入力回路最適化レポート](reports/ESC_二入力回路最適化_教育レポート.md) を参照してください。
 
 ## 数値安定化
 
@@ -55,6 +56,10 @@ I_e,reg = I_e,sat exp(-Vplus_delta(V_s) / T_e)
 ## Wafer―Focus Ring二表面ESCモデル
 
 Wafer面とFocus-ring面を異なるESC容量を介して独立電極へ接続し、それぞれの非線形シース・バルク枝を共通グローバルプラズマへ連成しました。物理的な微分容量`alpha_C=0.5`を使用し、代表条件とFocus-ring容量`90–720 pF`の感度計算はすべて収束しています。
+
+## 二入力整合回路の最適化
+
+各入力へ並列Cと直列Lを追加し、解析的L型整合を初期値にngspiceで局所最適化しました。有限Qコイル、周期収束ペナルティ、自己無撞着な密度再検証を含みます。代表条件では二ポートの見かけの反射目的関数が`1.8487`から`0.9528`へ低下しました。一方でFocus-ring枝の逆潮流とシース電圧上昇も生じるため、整合だけを目的にした解を実機設定とはみなしません。
 
 ## 出典
 

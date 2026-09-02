@@ -16,6 +16,7 @@ plasma-validate = "plasma_circuit.validation:main"
 plasma-map = "plasma_circuit.operating_map:main"
 plasma-esc = "plasma_circuit.esc_cli:main"
 plasma-esc-sweep = "plasma_circuit.esc_sweep:main"
+plasma-esc-optimize = "plasma_circuit.esc_optimization:main"
 
 [dependency-groups]
 dev = [
