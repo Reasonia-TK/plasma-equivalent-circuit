@@ -1,0 +1,81 @@
+{
+  "ngspice_path": "C:\\Spice64\\bin\\ngspice_con.exe",
+  "frequency_hz": 13560000.0,
+  "source_ramp_cycles": 10.0,
+  "pressure_pa": 2.0,
+  "gas_temperature_k": 300.0,
+  "argon_mass_amu": 39.948,
+  "surfaces": {
+    "wafer": {
+      "area_m2": 0.0706858,
+      "source_amplitude_v": 100.0,
+      "source_phase_deg": 0.0,
+      "source_resistance_ohm": 50.0,
+      "shunt_capacitance_f": 0.0,
+      "series_inductance_h": 5.0e-8,
+      "coupling_capacitance_f": 2.8e-9,
+      "dielectric_loss_tangent": 0.002,
+      "leakage_resistance_ohm": 1.0e12
+    },
+    "focus_ring": {
+      "area_m2": 0.0255254,
+      "source_amplitude_v": 100.0,
+      "source_phase_deg": 0.0,
+      "source_resistance_ohm": 50.0,
+      "shunt_capacitance_f": 0.0,
+      "series_inductance_h": 5.0e-8,
+      "coupling_capacitance_f": 1.8e-10,
+      "dielectric_loss_tangent": 0.002,
+      "leakage_resistance_ohm": 1.0e12
+    }
+  },
+  "zones": {
+    "wafer": {
+      "volume_m3": 0.002120515,
+      "grounded_area_m2": 0.146936,
+      "bulk_path_length_m": 0.03,
+      "electron_density_m3": 2.25e14,
+      "electron_temperature_ev": 3.98
+    },
+    "focus_ring": {
+      "volume_m3": 0.000765825,
+      "grounded_area_m2": 0.053064,
+      "bulk_path_length_m": 0.03,
+      "electron_density_m3": 2.25e14,
+      "electron_temperature_ev": 3.98
+    }
+  },
+  "interface": {
+    "path_length_m": 0.02,
+    "area_m2": 0.02,
+    "particle_exchange_conductance_m3_s": 2.0,
+    "thermal_exchange_conductance_m3_s": 2.0
+  },
+  "regularization": {
+    "capacitance_convention": "physical-matrix-sheath-differential",
+    "capacitance_scale": 0.5,
+    "capacitance_voltage_v": 0.05,
+    "electron_voltage_v": 0.05
+  },
+  "transient": {
+    "cycles": 480,
+    "saved_cycles": 24,
+    "samples_per_cycle": 240,
+    "reltol": 1.0e-6,
+    "abstol": 1.0e-9,
+    "vntol": 1.0e-7,
+    "timeout_s": 180
+  },
+  "validation": {
+    "electrical_coupling_scales": [0.003, 0.03, 1.0, 30.0, 300.0],
+    "transport": {
+      "initial_density_wafer_m3": 3.0e14,
+      "initial_density_focus_m3": 1.0e14,
+      "initial_temperature_wafer_ev": 5.0,
+      "initial_temperature_focus_ev": 3.0,
+      "duration_s": 0.01,
+      "samples": 401
+    }
+  },
+  "description": "Staged two-zone validation model; geometry and transport conductances are representative assumptions, not calibrated reactor values"
+}

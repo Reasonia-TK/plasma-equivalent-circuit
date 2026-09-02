@@ -1,0 +1,197 @@
+{
+  "model_scope": "frozen-zone electrical sweep plus closed conservative transport test",
+  "config": "configs\\esc_two_zone.json",
+  "electrical": [
+    {
+      "electrical_coupling_scale": 0.003,
+      "lateral": {
+        "coupling_scale": 0.003,
+        "interface_density_m3": 224999999999999.97,
+        "interface_temperature_ev": 3.98,
+        "momentum_collision_frequency_hz": 86038415.83495492,
+        "effective_collision_frequency_hz": 152794721.81180942,
+        "inductance_h": 5.257320279323371e-05,
+        "resistance_ohm": 8032.907895547986,
+        "impedance_magnitude_ohm": 9197.345750818722
+      },
+      "metrics": {
+        "absorbed_power_total_w": 3.5286368193259428,
+        "absorbed_power_wafer_port_w": 2.656140892190628,
+        "absorbed_power_focus_port_w": 0.8724959271353148,
+        "source_delivered_total_w": 15.230775803924079,
+        "power_balance_relative_error": 0.00034524802502113543,
+        "bulk_voltage_wafer_amplitude_v": 25.06915033300498,
+        "bulk_voltage_focus_amplitude_v": 23.419349777531863,
+        "bulk_voltage_difference_amplitude_v": 5.876240472883646,
+        "bulk_voltage_difference_offset_v": 1.3621912832587728,
+        "lateral_current_amplitude_a": 0.000638918448782106,
+        "lateral_resistive_loss_w": 0.001999496135580331,
+        "mean_sheath_wafer_v": 79.0568898287661,
+        "mean_sheath_focus_v": 75.74564653116192,
+        "mean_sheath_ground_wafer_v": 40.01638890029476,
+        "mean_sheath_ground_focus_v": 38.65419761703598,
+        "input_impedance_wafer_real_ohm": 13.746177502741219,
+        "input_impedance_wafer_imag_ohm": -142.21373892213262,
+        "input_impedance_focus_real_ohm": 37.198080388934216,
+        "input_impedance_focus_imag_ohm": -446.7384135416981,
+        "cycle_l2_max": 4.9926796241433616e-05
+      }
+    },
+    {
+      "electrical_coupling_scale": 0.03,
+      "lateral": {
+        "coupling_scale": 0.03,
+        "interface_density_m3": 224999999999999.97,
+        "interface_temperature_ev": 3.98,
+        "momentum_collision_frequency_hz": 86038415.83495492,
+        "effective_collision_frequency_hz": 152794721.81180942,
+        "inductance_h": 5.257320279323372e-06,
+        "resistance_ohm": 803.2907895547988,
+        "impedance_magnitude_ohm": 919.7345750818724
+      },
+      "metrics": {
+        "absorbed_power_total_w": 3.540689101030297,
+        "absorbed_power_wafer_port_w": 2.6633863755661014,
+        "absorbed_power_focus_port_w": 0.8773027254641956,
+        "source_delivered_total_w": 15.224347154065022,
+        "power_balance_relative_error": 0.0001489328127307428,
+        "bulk_voltage_wafer_amplitude_v": 25.20541081361674,
+        "bulk_voltage_focus_amplitude_v": 23.047684154405122,
+        "bulk_voltage_difference_amplitude_v": 5.949059556153069,
+        "bulk_voltage_difference_offset_v": 0.8587339733389545,
+        "lateral_current_amplitude_a": 0.006468045372131204,
+        "lateral_resistive_loss_w": 0.01904679830254317,
+        "mean_sheath_wafer_v": 78.92835867028474,
+        "mean_sheath_focus_v": 76.05961370049167,
+        "mean_sheath_ground_wafer_v": 39.90805884405819,
+        "mean_sheath_ground_focus_v": 39.049324870719246,
+        "input_impedance_wafer_real_ohm": 13.797207388863724,
+        "input_impedance_wafer_imag_ohm": -142.3859552455797,
+        "input_impedance_focus_real_ohm": 37.220420089306316,
+        "input_impedance_focus_imag_ohm": -445.16225099823015,
+        "cycle_l2_max": 8.205253104637244e-05
+      }
+    },
+    {
+      "electrical_coupling_scale": 1.0,
+      "lateral": {
+        "coupling_scale": 1.0,
+        "interface_density_m3": 224999999999999.97,
+        "interface_temperature_ev": 3.98,
+        "momentum_collision_frequency_hz": 86038415.83495492,
+        "effective_collision_frequency_hz": 152794721.81180942,
+        "inductance_h": 1.5771960837970112e-07,
+        "resistance_ohm": 24.098723686643957,
+        "impedance_magnitude_ohm": 27.592037252456166
+      },
+      "metrics": {
+        "absorbed_power_total_w": 3.5886703253687537,
+        "absorbed_power_wafer_port_w": 3.366952578992948,
+        "absorbed_power_focus_port_w": 0.2217177463758056,
+        "source_delivered_total_w": 15.242501730118427,
+        "power_balance_relative_error": 0.0003145210646377438,
+        "bulk_voltage_wafer_amplitude_v": 24.728919193442493,
+        "bulk_voltage_focus_amplitude_v": 23.372413900717138,
+        "bulk_voltage_difference_amplitude_v": 1.548877638718792,
+        "bulk_voltage_difference_offset_v": 0.011209405163415771,
+        "lateral_current_amplitude_a": 0.056132426608546906,
+        "lateral_resistive_loss_w": 0.05805316712199407,
+        "mean_sheath_wafer_v": 78.24181436091757,
+        "mean_sheath_focus_v": 78.18425748365027,
+        "mean_sheath_ground_wafer_v": 39.5193410979895,
+        "mean_sheath_ground_focus_v": 39.50813169282609,
+        "input_impedance_wafer_real_ohm": 17.162233370936328,
+        "input_impedance_wafer_imag_ohm": -141.19917431328918,
+        "input_impedance_focus_real_ohm": 10.938562345947513,
+        "input_impedance_focus_imag_ohm": -445.9536451497734,
+        "cycle_l2_max": 0.00010848373109668442
+      }
+    },
+    {
+      "electrical_coupling_scale": 30.0,
+      "lateral": {
+        "coupling_scale": 30.0,
+        "interface_density_m3": 224999999999999.97,
+        "interface_temperature_ev": 3.98,
+        "momentum_collision_frequency_hz": 86038415.83495492,
+        "effective_collision_frequency_hz": 152794721.81180942,
+        "inductance_h": 5.2573202793233714e-09,
+        "resistance_ohm": 0.8032907895547987,
+        "impedance_magnitude_ohm": 0.9197345750818723
+      },
+      "metrics": {
+        "absorbed_power_total_w": 3.531312458488952,
+        "absorbed_power_wafer_port_w": 3.307140380623579,
+        "absorbed_power_focus_port_w": 0.22417207786537297,
+        "source_delivered_total_w": 15.25508338760321,
+        "power_balance_relative_error": 0.0001247559402885128,
+        "bulk_voltage_wafer_amplitude_v": 24.368500185350058,
+        "bulk_voltage_focus_amplitude_v": 24.3322844825992,
+        "bulk_voltage_difference_amplitude_v": 0.04772450351211362,
+        "bulk_voltage_difference_offset_v": 1.7446397639011974e-05,
+        "lateral_current_amplitude_a": 0.051889499105535336,
+        "lateral_resistive_loss_w": 0.001589077842839993,
+        "mean_sheath_wafer_v": 78.58430377880218,
+        "mean_sheath_focus_v": 77.38282779879276,
+        "mean_sheath_ground_wafer_v": 39.51436131750005,
+        "mean_sheath_ground_focus_v": 39.514343871102405,
+        "input_impedance_wafer_real_ohm": 16.871897925004212,
+        "input_impedance_wafer_imag_ohm": -140.71834950835998,
+        "input_impedance_focus_real_ohm": 11.118056197390773,
+        "input_impedance_focus_imag_ohm": -450.3938738448104,
+        "cycle_l2_max": 0.00011143860389330773
+      }
+    },
+    {
+      "electrical_coupling_scale": 300.0,
+      "lateral": {
+        "coupling_scale": 300.0,
+        "interface_density_m3": 224999999999999.97,
+        "interface_temperature_ev": 3.98,
+        "momentum_collision_frequency_hz": 86038415.83495492,
+        "effective_collision_frequency_hz": 152794721.81180942,
+        "inductance_h": 5.257320279323371e-10,
+        "resistance_ohm": 0.08032907895547987,
+        "impedance_magnitude_ohm": 0.09197345750818724
+      },
+      "metrics": {
+        "absorbed_power_total_w": 3.5285178446940373,
+        "absorbed_power_wafer_port_w": 3.303202803784327,
+        "absorbed_power_focus_port_w": 0.22531504090971063,
+        "source_delivered_total_w": 15.254830173656725,
+        "power_balance_relative_error": 7.00385852992959e-05,
+        "bulk_voltage_wafer_amplitude_v": 24.358615003227943,
+        "bulk_voltage_focus_amplitude_v": 24.355019969043987,
+        "bulk_voltage_difference_amplitude_v": 0.004759685019419893,
+        "bulk_voltage_difference_offset_v": 5.568422747345433e-07,
+        "lateral_current_amplitude_a": 0.05175086753898482,
+        "lateral_resistive_loss_w": 0.00015714999162562423,
+        "mean_sheath_wafer_v": 78.59719676650288,
+        "mean_sheath_focus_v": 77.35264028012526,
+        "mean_sheath_ground_wafer_v": 39.51430582794988,
+        "mean_sheath_ground_focus_v": 39.5143052711076,
+        "input_impedance_wafer_real_ohm": 16.852520952645545,
+        "input_impedance_wafer_imag_ohm": -140.70424232359227,
+        "input_impedance_focus_real_ohm": 11.163710695716262,
+        "input_impedance_focus_imag_ohm": -450.483825311642,
+        "cycle_l2_max": 1.0997976751206353e-06
+      }
+    }
+  ],
+  "transport": {
+    "initial_particle_count": 712737000000.0,
+    "final_particle_count": 712737000000.0,
+    "initial_energy_j": 8.196383180684518e-07,
+    "final_energy_j": 8.196383180684516e-07,
+    "particle_conservation_relative_error": 0.0,
+    "energy_conservation_relative_error": 2.5835570659092853e-16,
+    "final_density_nonuniformity": 8.434675106482469e-11,
+    "final_temperature_nonuniformity": 1.3128980372443625e-11
+  },
+  "transport_final": {
+    "density_wafer_m3": 246934526083535.1,
+    "density_focus_m3": 246934526062706.97,
+    "temperature_wafer_ev": 4.7851030604723475,
+    "temperature_focus_ev": 4.785103060409524
+  }
+}

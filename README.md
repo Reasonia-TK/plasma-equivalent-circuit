@@ -21,9 +21,10 @@ uv run plasma-map --sweep configs/pressure_voltage_sweep.json --raw-output artif
 uv run plasma-esc --config configs/esc_wafer_focus_ring.json --output artifacts/esc_wafer_focus_ring/baseline
 uv run plasma-esc-sweep --sweep configs/esc_focus_capacitance_sweep.json
 uv run plasma-esc-optimize --optimization configs/esc_matching_optimization.json
+uv run plasma-esc-two-zone --config configs/esc_two_zone.json --output artifacts/esc_two_zone/validation
 ```
 
-生成途中の netlist、波形、ログは `artifacts/` に保存されます。検証済みの集計値は `reports/data/`、図とレポートは `reports/` に保存します。結果の要約は [Schmidt2018 再現レポート](reports/Schmidt2018再現レポート.md)、係数の由来は [容量規約監査](reports/Capacitance規約監査.md)、標準点外の計算は [圧力―電源振幅予測マップ](reports/PressureVoltage予測マップ.md)、二表面ESCモデルは [Wafer―Focus Ringモデル](reports/ESC_Wafer_FocusRingモデル.md)、整合設計の教材は [二入力回路最適化レポート](reports/ESC_二入力回路最適化_教育レポート.md) を参照してください。
+生成途中の netlist、波形、ログは `artifacts/` に保存されます。検証済みの集計値は `reports/data/`、図とレポートは `reports/` に保存します。結果の要約は [Schmidt2018 再現レポート](reports/Schmidt2018再現レポート.md)、係数の由来は [容量規約監査](reports/Capacitance規約監査.md)、標準点外の計算は [圧力―電源振幅予測マップ](reports/PressureVoltage予測マップ.md)、二表面ESCモデルは [Wafer―Focus Ringモデル](reports/ESC_Wafer_FocusRingモデル.md)、整合設計の教材は [二入力回路最適化レポート](reports/ESC_二入力回路最適化_教育レポート.md)、二つの局所bulk節点と保存的な横輸送の検証は [二ゾーンモデル検証](reports/ESC_二ゾーンモデル検証.md) を参照してください。
 
 ## 数値安定化
 
@@ -60,6 +61,10 @@ Wafer面とFocus-ring面を異なるESC容量を介して独立電極へ接続�
 ## 二入力整合回路の最適化
 
 各入力へ並列Cと直列Lを追加し、解析的L型整合を初期値にngspiceで局所最適化しました。有限Qコイル、周期収束ペナルティ、自己無撞着な密度再検証を含みます。代表条件では二ポートの見かけの反射目的関数が`1.8487`から`0.9528`へ低下しました。一方でFocus-ring枝の逆潮流とシース電圧上昇も生じるため、整合だけを目的にした解を実機設定とはみなしません。
+
+## Wafer―Focus Ring二ゾーン検証
+
+Wafer側とFocus-ring側に独立した局所bulk節点と接地シースを置き、両者を電子運動量式に基づく有限の横方向R–L枝で接続しました。強結合端ではbulk電位差が平均RF振幅の`0.0195%`まで低下し、閉鎖輸送試験では全粒子数と電子エネルギーを保存しながら`ne`と`Te`が一致しました。現段階は固定`ne, Te`の電気試験と保存的輸送試験であり、局所電離・壁損失・RF吸収を含む自己無撞着な二ゾーングローバルモデルは次段です。
 
 ## 出典
 
