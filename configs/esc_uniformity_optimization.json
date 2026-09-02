@@ -1,0 +1,44 @@
+{
+  "base_config": "configs/esc_two_zone.json",
+  "description": "Constrained focus-electrode search using frozen two-zone power-density screening and self-consistent Bohm-ion-flux verification",
+  "bounds": {
+    "focus_source_amplitude_v": [80.0, 120.0],
+    "focus_source_phase_deg": [-30.0, 30.0],
+    "focus_coupling_capacitance_f": [9.0e-11, 3.6e-10]
+  },
+  "sobol_power": 4,
+  "sobol_seed": 20260902,
+  "local_step_fractions": [0.015, 0.003],
+  "local_full_factorial": true,
+  "parallel_workers": 2,
+  "verification_candidates": 4,
+  "penalty_weight": 1.0,
+  "failure_objective": 1000000.0,
+  "frozen_transient": {
+    "cycles": 240,
+    "saved_cycles": 24,
+    "samples_per_cycle": 180,
+    "timeout_s": 180
+  },
+  "verification_self_consistent": {
+    "relative_tolerance": 0.001,
+    "fixed_point_residual_tolerance": 0.001,
+    "max_iterations": 30
+  },
+  "final_confirmation_self_consistent": {
+    "relative_tolerance": 0.0002,
+    "fixed_point_residual_tolerance": 0.0002,
+    "max_iterations": 30
+  },
+  "constraints": {
+    "total_power_relative_change_max": 0.1,
+    "powered_sheath_mean_max_v": 120.0,
+    "focus_port_power_min_w": 0.02,
+    "local_allocated_power_min_w": 0.1,
+    "cycle_l2_max": 0.0002,
+    "reflection_magnitude_max": {
+      "wafer": 0.98,
+      "focus_ring": 0.999
+    }
+  }
+}

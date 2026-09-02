@@ -23,9 +23,10 @@ uv run plasma-esc-sweep --sweep configs/esc_focus_capacitance_sweep.json
 uv run plasma-esc-optimize --optimization configs/esc_matching_optimization.json
 uv run plasma-esc-two-zone --config configs/esc_two_zone.json --output artifacts/esc_two_zone/validation
 uv run plasma-esc-two-zone-coupled --config configs/esc_two_zone.json --output artifacts/esc_two_zone/self_consistent
+uv run plasma-esc-uniformity-optimize --optimization configs/esc_uniformity_optimization.json
 ```
 
-生成途中の netlist、波形、ログは `artifacts/` に保存されます。検証済みの集計値は `reports/data/`、図とレポートは `reports/` に保存します。結果の要約は [Schmidt2018 再現レポート](reports/Schmidt2018再現レポート.md)、係数の由来は [容量規約監査](reports/Capacitance規約監査.md)、標準点外の計算は [圧力―電源振幅予測マップ](reports/PressureVoltage予測マップ.md)、二表面ESCモデルは [Wafer―Focus Ringモデル](reports/ESC_Wafer_FocusRingモデル.md)、整合設計の教材は [二入力回路最適化レポート](reports/ESC_二入力回路最適化_教育レポート.md)、横結合の極限と保存則は [二ゾーンモデル検証](reports/ESC_二ゾーンモデル検証.md)、局所粒子・電力収支との反復連成は [二ゾーン自己無撞着モデル](reports/ESC_二ゾーン自己無撞着モデル.md) を参照してください。
+生成途中の netlist、波形、ログは `artifacts/` に保存されます。検証済みの集計値は `reports/data/`、図とレポートは `reports/` に保存します。結果の要約は [Schmidt2018 再現レポート](reports/Schmidt2018再現レポート.md)、係数の由来は [容量規約監査](reports/Capacitance規約監査.md)、標準点外の計算は [圧力―電源振幅予測マップ](reports/PressureVoltage予測マップ.md)、二表面ESCモデルは [Wafer―Focus Ringモデル](reports/ESC_Wafer_FocusRingモデル.md)、整合設計の教材は [二入力回路最適化レポート](reports/ESC_二入力回路最適化_教育レポート.md)、横結合の極限と保存則は [二ゾーンモデル検証](reports/ESC_二ゾーンモデル検証.md)、局所粒子・電力収支との反復連成は [二ゾーン自己無撞着モデル](reports/ESC_二ゾーン自己無撞着モデル.md)、Focus電気条件によるイオン束均一化は [二ゾーン均一性最適化](reports/ESC_二ゾーン均一性最適化.md) を参照してください。
 
 ## 数値安定化
 
@@ -70,6 +71,10 @@ Wafer側とFocus-ring側に独立した局所bulk節点と接地シースを置�
 ## 二ゾーン自己無撞着グローバルモデル
 
 二つの局所粒子収支と二つの電子エネルギー収支を、非線形ngspice回路へ反復連成しました。基準条件は6反復で収束し、`ne,W=2.2889e14 m^-3`、`ne,F=2.2781e14 m^-3`、Bohmイオン束不均一度は`0.474%`でした。横RF枝はWaferからFocusへ`0.735 W`を移送しており、この条件では粒子・熱交換よりも電気的な横結合が局所電力均一化を支配します。
+
+## 二ゾーン均一性最適化
+
+Focus電源の振幅・位相とFocus ESC容量を設計変数にし、凍結プラズマによる高速選別と自己無撞着モデルによる再検証を組み合わせました。選択値は`99.88 V peak`、`+0.18°`、`184.05 pF`で、Bohmイオン束不均一度は`0.474%`から`0.049%`へ低下しました。全吸収電力の変化は`+0.262%`で全制約を満たしましたが、最適点は小さな設定差に敏感なため、実機適用には寄生容量の同定と公差を含むロバスト最適化が必要です。
 
 ## 出典
 
