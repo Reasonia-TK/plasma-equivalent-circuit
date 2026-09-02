@@ -31,15 +31,15 @@
   },
   "zones": {
     "wafer": {
-      "volume_m3": 0.002120515,
-      "grounded_area_m2": 0.146936,
+      "volume_m3": 0.0021205769387763586,
+      "grounded_area_m2": 0.1469388179338788,
       "bulk_path_length_m": 0.03,
       "electron_density_m3": 2.25e14,
       "electron_temperature_ev": 3.98
     },
     "focus_ring": {
-      "volume_m3": 0.000765825,
-      "grounded_area_m2": 0.053064,
+      "volume_m3": 0.0007657630612236413,
+      "grounded_area_m2": 0.053061182066121204,
       "bulk_path_length_m": 0.03,
       "electron_density_m3": 2.25e14,
       "electron_temperature_ev": 3.98
@@ -77,5 +77,26 @@
       "samples": 401
     }
   },
-  "description": "Staged two-zone validation model; geometry and transport conductances are representative assumptions, not calibrated reactor values"
+  "self_consistent": {
+    "electrical_coupling_scale": 1.0,
+    "transport_scale": 1.0,
+    "particle_energy_transport_factor": 1.5,
+    "relaxation": 0.45,
+    "relative_tolerance": 0.0005,
+    "fixed_point_residual_tolerance": 0.001,
+    "balance_solver_residual_tolerance": 1.0e-7,
+    "balance_max_function_evaluations": 300,
+    "consecutive_converged": 2,
+    "cycle_l2_tolerance": 2.0e-4,
+    "max_iterations": 20,
+    "iteration_cycles": 480,
+    "density_bounds_m3": [1.0e11, 1.0e17],
+    "temperature_bounds_ev": [0.2, 20.0],
+    "transport_sweep_scales": [0.0, 0.1, 1.0, 10.0, 100.0],
+    "transport_sweep_relative_tolerance": 0.001,
+    "transport_sweep_high_scale_threshold": 5.0,
+    "transport_sweep_high_scale_relaxation": 0.1,
+    "transport_sweep_max_iterations": 40
+  },
+  "description": "Two-zone ESC validation and self-consistent global model; geometry and transport conductances are representative assumptions, not calibrated reactor values"
 }

@@ -18,6 +18,7 @@ plasma-esc = "plasma_circuit.esc_cli:main"
 plasma-esc-sweep = "plasma_circuit.esc_sweep:main"
 plasma-esc-optimize = "plasma_circuit.esc_optimization:main"
 plasma-esc-two-zone = "plasma_circuit.esc_two_zone_cli:main"
+plasma-esc-two-zone-coupled = "plasma_circuit.esc_two_zone_coupled_cli:main"
 
 [dependency-groups]
 dev = [

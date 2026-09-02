@@ -100,6 +100,11 @@ class TwoZoneMetrics:
     absorbed_power_total_w: float
     absorbed_power_wafer_port_w: float
     absorbed_power_focus_port_w: float
+    absorbed_power_wafer_allocated_w: float
+    absorbed_power_focus_allocated_w: float
+    lateral_power_wafer_to_branch_w: float
+    lateral_power_branch_to_focus_w: float
+    lateral_power_transfer_midpoint_w: float
     source_delivered_total_w: float
     power_balance_relative_error: float
     bulk_voltage_wafer_amplitude_v: float
@@ -142,6 +147,36 @@ class TransportValidationResult:
     energy_conservation_relative_error: float
     final_density_nonuniformity: float
     final_temperature_nonuniformity: float
+
+
+def allocate_lateral_power(
+    wafer_port_power_w: float,
+    focus_port_power_w: float,
+    wafer_to_branch_power_w: float,
+    branch_to_focus_power_w: float,
+) -> tuple[float, float, float]:
+    """Allocate plasma power while splitting lateral dissipation symmetrically.
+
+    The midpoint transfer is the average of power entering the lateral branch at
+    its wafer end and power leaving it at the focus end. Their difference is the
+    branch loss. This convention assigns half of that loss to each adjacent zone
+    and exactly preserves the sum of the two powered-port powers.
+    """
+    values = np.asarray(
+        (
+            wafer_port_power_w,
+            focus_port_power_w,
+            wafer_to_branch_power_w,
+            branch_to_focus_power_w,
+        ),
+        dtype=float,
+    )
+    if not np.all(np.isfinite(values)):
+        raise ValueError("power-allocation inputs must be finite")
+    transfer = 0.5 * (wafer_to_branch_power_w + branch_to_focus_power_w)
+    wafer_allocated = wafer_port_power_w - transfer
+    focus_allocated = focus_port_power_w + transfer
+    return float(wafer_allocated), float(focus_allocated), float(transfer)
 
 
 def load_two_zone_config(path: str | Path) -> dict[str, Any]:
@@ -440,6 +475,20 @@ def analyze_two_zone_waveforms(
     p_wafer = mean(w["v_surface_wafer"] * w["i_surface_wafer"])
     p_focus = mean(w["v_surface_focus"] * w["i_surface_focus"])
     p_absorbed = p_wafer + p_focus
+    p_lateral_wafer_to_branch = mean(
+        w["v_sheath_ground_wafer"] * w["i_lateral"]
+    )
+    p_lateral_branch_to_focus = mean(
+        w["v_sheath_ground_focus"] * w["i_lateral"]
+    )
+    p_wafer_allocated, p_focus_allocated, p_lateral_transfer = (
+        allocate_lateral_power(
+            p_wafer,
+            p_focus,
+            p_lateral_wafer_to_branch,
+            p_lateral_branch_to_focus,
+        )
+    )
     p_source = mean(w["v_source_wafer"] * w["i_source_wafer"]) + mean(
         w["v_source_focus"] * w["i_source_focus"]
     )
@@ -478,6 +527,11 @@ def analyze_two_zone_waveforms(
         absorbed_power_total_w=float(p_absorbed),
         absorbed_power_wafer_port_w=float(p_wafer),
         absorbed_power_focus_port_w=float(p_focus),
+        absorbed_power_wafer_allocated_w=p_wafer_allocated,
+        absorbed_power_focus_allocated_w=p_focus_allocated,
+        lateral_power_wafer_to_branch_w=float(p_lateral_wafer_to_branch),
+        lateral_power_branch_to_focus_w=float(p_lateral_branch_to_focus),
+        lateral_power_transfer_midpoint_w=p_lateral_transfer,
         source_delivered_total_w=float(p_source),
         power_balance_relative_error=float(power_error),
         bulk_voltage_wafer_amplitude_v=abs(_phasor(t, zone_wafer, frequency)),
