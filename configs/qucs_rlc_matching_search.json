@@ -1,0 +1,30 @@
+{
+  "description": "Finite-Q L-match selected after staged frozen-plasma screening and self-consistent verification",
+  "base_config": "qucs_rlc_one_zone.json",
+  "baseline_summary": "../reports/data/qucs_rlc_one_zone.json",
+  "reference_impedance_ohm": 50.0,
+  "selected_design": {
+    "series_inductance_h": 5.0e-6,
+    "series_capacitance_f": 1.0e-9,
+    "shunt_capacitance_f": 12.0e-12,
+    "series_inductor_quality_factor": 30.0
+  },
+  "source_ramp_cycles": 60.0,
+  "verification_transient": {
+    "cycles": 1200,
+    "saved_cycles": 36,
+    "samples_per_cycle": 400,
+    "reltol": 1.0e-6,
+    "abstol": 1.0e-9,
+    "vntol": 1.0e-7,
+    "timeout_s": 180
+  },
+  "verification_coupling": {
+    "initial_density_m3": 1.5e15,
+    "relaxation": 0.4,
+    "relative_tolerance": 0.001,
+    "consecutive_converged": 2,
+    "cycle_l2_tolerance": 0.0002,
+    "max_iterations": 30
+  }
+}

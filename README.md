@@ -25,9 +25,10 @@ uv run plasma-esc-two-zone --config configs/esc_two_zone.json --output artifacts
 uv run plasma-esc-two-zone-coupled --config configs/esc_two_zone.json --output artifacts/esc_two_zone/self_consistent
 uv run plasma-esc-uniformity-optimize --optimization configs/esc_uniformity_optimization.json
 uv run plasma-qucs-one-zone --config configs/qucs_rlc_one_zone.json --output artifacts/qucs_rlc_one_zone/self_consistent
+uv run plasma-qucs-match --search configs/qucs_rlc_matching_search.json
 ```
 
-生成途中の netlist、波形、ログは `artifacts/` に保存されます。検証済みの集計値は `reports/data/`、図とレポートは `reports/` に保存します。結果の要約は [Schmidt2018 再現レポート](reports/Schmidt2018再現レポート.md)、係数の由来は [容量規約監査](reports/Capacitance規約監査.md)、標準点外の計算は [圧力―電源振幅予測マップ](reports/PressureVoltage予測マップ.md)、二表面ESCモデルは [Wafer―Focus Ringモデル](reports/ESC_Wafer_FocusRingモデル.md)、整合設計の教材は [二入力回路最適化レポート](reports/ESC_二入力回路最適化_教育レポート.md)、横結合の極限と保存則は [二ゾーンモデル検証](reports/ESC_二ゾーンモデル検証.md)、局所粒子・電力収支との反復連成は [二ゾーン自己無撞着モデル](reports/ESC_二ゾーン自己無撞着モデル.md)、Focus電気条件によるイオン束均一化は [二ゾーン均一性最適化](reports/ESC_二ゾーン均一性最適化.md)、Qucs-S回路の導入方法は [Qucs-S netlist連成手順](reports/Qucs-S_netlistグローバルモデル連成手順.md)、実装済みの最小構成と計算結果は [Qucs-S RLC一ゾーン連成レポート](reports/Qucs-S_RLC一ゾーンプラズマ連成.md) を参照してください。
+生成途中の netlist、波形、ログは `artifacts/` に保存されます。検証済みの集計値は `reports/data/`、図とレポートは `reports/` に保存します。結果の要約は [Schmidt2018 再現レポート](reports/Schmidt2018再現レポート.md)、係数の由来は [容量規約監査](reports/Capacitance規約監査.md)、標準点外の計算は [圧力―電源振幅予測マップ](reports/PressureVoltage予測マップ.md)、二表面ESCモデルは [Wafer―Focus Ringモデル](reports/ESC_Wafer_FocusRingモデル.md)、整合設計の教材は [二入力回路最適化レポート](reports/ESC_二入力回路最適化_教育レポート.md)、横結合の極限と保存則は [二ゾーンモデル検証](reports/ESC_二ゾーンモデル検証.md)、局所粒子・電力収支との反復連成は [二ゾーン自己無撞着モデル](reports/ESC_二ゾーン自己無撞着モデル.md)、Focus電気条件によるイオン束均一化は [二ゾーン均一性最適化](reports/ESC_二ゾーン均一性最適化.md)、Qucs-S回路の導入方法は [Qucs-S netlist連成手順](reports/Qucs-S_netlistグローバルモデル連成手順.md)、実装済みの最小構成は [Qucs-S RLC一ゾーン連成レポート](reports/Qucs-S_RLC一ゾーンプラズマ連成.md)、有限Qを含む整合条件は [Qucs-S RLC整合条件探索](reports/Qucs-S_RLC整合条件探索.md) を参照してください。
 
 ## 数値安定化
 
@@ -80,6 +81,10 @@ Focus電源の振幅・位相とFocus ESC容量を設計変数にし、凍結プ
 ## Qucs-S RLC一ゾーン連成
 
 Qucs-S 26.1.0から出力したダミーロードなしの直列RLC netlistを正規化し、`w_feed`へ一ゾーンAr-CCPモデルを接続しました。自己無撞着計算は8反復で収束し、`Te=4.7493 eV`、`ne=1.8892e14 m^-3`、プラズマ吸収電力`0.4340 W`、電力収支残差`0.0294%`でした。入力インピーダンスは`155.68-j1064.84 Ω`で強い容量性を示すため、次段階ではプラズマ負荷を用いた整合素子の再設計が必要です。
+
+## Qucs-S RLC整合条件探索
+
+直列L1、負荷側並列C、コイル有限Qを段階探索し、自己無撞着な採用点を`L1=5.0 µH`、`C1=1.0 nF`、`Csh=12 pF`、`Q=30`としました。50 Ω電源抵抗を除いた外部負荷は`22.45-j6.18 Ω`、`|Gamma|=0.3883`で、基準の`0.9908`から60.8%低下しました。プラズマ吸収電力は`7.611 W`へ増加しましたが、R1とコイルESRの合計損失は`60.90 W`に達するため、次段階では実部品制約と効率を含む多目的最適化が必要です。
 
 ## 出典
 

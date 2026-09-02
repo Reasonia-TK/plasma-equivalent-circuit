@@ -183,6 +183,91 @@ def normalize_qucs_netlist(raw_netlist: str, qucs: Mapping[str, Any]) -> str:
     return normalized
 
 
+def apply_component_overrides(
+    normalized_netlist: str, overrides: Mapping[str, float]
+) -> str:
+    """Replace scalar R/L/C values while preserving the exported topology."""
+    if not overrides:
+        return normalized_netlist
+    pending = {str(name).lower(): float(value) for name, value in overrides.items()}
+    if any(not np.isfinite(value) or value <= 0.0 for value in pending.values()):
+        raise ValueError("Qucs-S component overrides must be finite and positive")
+    output: list[str] = []
+    replaced: set[str] = set()
+    for line in normalized_netlist.splitlines():
+        fields = line.split()
+        if fields and fields[0].lower() in pending:
+            device = fields[0]
+            if device[0].lower() not in {"r", "l", "c"} or len(fields) < 4:
+                raise ValueError(
+                    f"component override supports scalar R/L/C devices only: {device}"
+                )
+            fields[3] = _fmt(pending[device.lower()])
+            line = " ".join(fields)
+            replaced.add(device.lower())
+        output.append(line)
+    missing = sorted(set(pending) - replaced)
+    if missing:
+        raise ValueError(f"Qucs-S component override devices not found: {missing}")
+    return "\n".join(output) + "\n"
+
+
+def apply_series_inductor_quality_factor(
+    normalized_netlist: str,
+    device_name: str,
+    frequency_hz: float,
+    quality_factor: float,
+) -> str:
+    """Add a series ESR to one exported inductor using R=omega*L/Q."""
+    if not np.isfinite(quality_factor) or quality_factor <= 0.0:
+        raise ValueError("series inductor quality factor must be finite and positive")
+    target = device_name.lower()
+    output: list[str] = []
+    replaced = False
+    for line in normalized_netlist.splitlines():
+        fields = line.split()
+        if fields and fields[0].lower() == target:
+            if fields[0][0].lower() != "l" or len(fields) != 4:
+                raise ValueError(
+                    f"quality-factor model requires a scalar inductor: {device_name}"
+                )
+            inductance_h = float(fields[3])
+            resistance_ohm = (
+                2.0 * np.pi * float(frequency_hz) * inductance_h / quality_factor
+            )
+            internal_node = f"qucs_{target}_esr_internal"
+            output.append(f"{fields[0]} {fields[1]} {internal_node} {fields[3]}")
+            output.append(
+                f"Rloss_{fields[0]} {internal_node} {fields[2]} {_fmt(resistance_ohm)}"
+            )
+            replaced = True
+        else:
+            output.append(line)
+    if not replaced:
+        raise ValueError(f"series inductor for quality-factor model not found: {device_name}")
+    return "\n".join(output) + "\n"
+
+
+def _prepare_external_body(
+    raw_netlist: str, config: Mapping[str, Any]
+) -> str:
+    normalized = normalize_qucs_netlist(raw_netlist, config["qucs_netlist"])
+    normalized = apply_component_overrides(
+        normalized,
+        config["qucs_netlist"].get("component_overrides", {}),
+    )
+    matching = config.get("matching", {})
+    quality_factor = matching.get("series_inductor_quality_factor")
+    if quality_factor is not None:
+        normalized = apply_series_inductor_quality_factor(
+            normalized,
+            str(matching.get("series_inductor_device", "L1")),
+            float(config["frequency_hz"]),
+            float(quality_factor),
+        )
+    return normalized
+
+
 def _vector_specs(config: Mapping[str, Any]) -> tuple[tuple[str, str], ...]:
     qucs = config["qucs_netlist"]
     substitutions = {
@@ -191,6 +276,36 @@ def _vector_specs(config: Mapping[str, Any]) -> tuple[tuple[str, str], ...]:
         "source_device": str(qucs["source_device"]),
     }
     return tuple((name, expression.format(**substitutions)) for name, expression in VECTOR_SPECS)
+
+
+def series_inductor_esr_ohm(config: Mapping[str, Any]) -> float:
+    """Return the optional Q-derived loss inserted in series with the Qucs inductor."""
+    matching = config.get("matching", {})
+    quality_factor = matching.get("series_inductor_quality_factor")
+    if quality_factor is None:
+        return 0.0
+    device = str(matching.get("series_inductor_device", "L1"))
+    overrides = config["qucs_netlist"].get("component_overrides", {})
+    value = next(
+        (
+            float(component_value)
+            for component_name, component_value in overrides.items()
+            if str(component_name).lower() == device.lower()
+        ),
+        None,
+    )
+    if value is None:
+        raise ValueError(
+            "Q-derived series loss requires an explicit component override for "
+            f"{device}"
+        )
+    return float(
+        2.0
+        * np.pi
+        * float(config["frequency_hz"])
+        * value
+        / float(quality_factor)
+    )
 
 
 def _replace_source_with_ramped_source(
@@ -242,10 +357,32 @@ def render_qucs_one_zone_netlist(
     saved_start = total_time - int(transient["saved_cycles"]) * period
     step = period / int(transient["samples_per_cycle"])
     vectors = " ".join(expression for _, expression in _vector_specs(config))
-    normalized_body = normalize_qucs_netlist(raw_netlist, config["qucs_netlist"])
+    normalized_body = _prepare_external_body(raw_netlist, config)
     body = _replace_source_with_ramped_source(normalized_body, config)
     eq_v = plasma.equilibrium_sheath_voltage_v
     interface_node = str(config["qucs_netlist"]["interface_node"])
+    shunt_capacitance = float(
+        config.get("matching", {}).get("shunt_capacitance_f", 0.0)
+    )
+    shunt_inductance = float(
+        config.get("matching", {}).get("shunt_inductance_h", 0.0)
+    )
+    if not np.isfinite(shunt_capacitance) or shunt_capacitance < 0.0:
+        raise ValueError("matching shunt capacitance must be finite and non-negative")
+    if not np.isfinite(shunt_inductance) or shunt_inductance < 0.0:
+        raise ValueError("matching shunt inductance must be finite and non-negative")
+    if shunt_capacitance > 0.0 and shunt_inductance > 0.0:
+        raise ValueError("select either shunt capacitance or shunt inductance, not both")
+    if shunt_capacitance > 0.0:
+        shunt_element = (
+            f"Cmatch_shunt_qucs {interface_node} 0 {_fmt(shunt_capacitance)}\n"
+        )
+    elif shunt_inductance > 0.0:
+        shunt_element = (
+            f"Lmatch_shunt_qucs {interface_node} 0 {_fmt(shunt_inductance)}\n"
+        )
+    else:
+        shunt_element = ""
     return f"""Qucs-S RLC external circuit coupled to one-zone global plasma model
 .param freq={_fmt(frequency)}
 .param te_ev={_fmt(plasma.electron_temperature_ev)}
@@ -259,7 +396,7 @@ def render_qucs_one_zone_netlist(
 .func spos(x,d) {{(x > 0) ? 0.5*(x+sqrt(x*x+d*d)) : 0.5*d*d/(sqrt(x*x+d*d)-x)}}
 
 {body}
-* The zero-volt source fixes the positive current direction from Qucs-S into plasma.
+{shunt_element}* Python-inserted sensor: positive current flows from Qucs-S into plasma.
 Vsense_surface_wafer {interface_node} plasma 0
 
 * Powered wafer sheath.
@@ -331,8 +468,10 @@ def analyze_qucs_one_zone_waveforms(
     p_abs = mean(w["v_plasma"] * i_plasma_wave)
     p_source = mean(w["v_source"] * i_generator_wave)
     series_resistance = float(config["qucs_netlist"]["series_loss_resistance_ohm"])
-    p_series = mean(i_generator_wave**2) * series_resistance
-    accounted_power = p_series + p_abs
+    current_squared_mean = mean(i_generator_wave**2)
+    p_series = current_squared_mean * series_resistance
+    p_inductor = current_squared_mean * series_inductor_esr_ohm(config)
+    accounted_power = p_series + p_inductor + p_abs
     power_error = abs(p_source - accounted_power) / max(abs(p_source), 1.0e-30)
     source_phasor = _phasor(t, w["v_source"], frequency)
     generator_phasor = _phasor(t, i_generator_wave, frequency)
@@ -356,7 +495,7 @@ def analyze_qucs_one_zone_waveforms(
         absorbed_power_w=float(p_abs),
         source_delivered_power_w=float(p_source),
         source_resistor_loss_w=float(p_series),
-        match_loss_w=0.0,
+        match_loss_w=float(p_inductor),
         stray_loss_w=0.0,
         mean_sheath_powered_v=mean(w["v_sheath_powered"]),
         mean_sheath_grounded_v=mean(w["v_sheath_grounded"]),
@@ -386,7 +525,7 @@ def run_qucs_one_zone_ngspice(
     case_directory.mkdir(parents=True, exist_ok=True)
     source_path = Path(config["qucs_netlist"]["resolved_path"])
     raw_netlist = source_path.read_text(encoding="utf-8", errors="replace")
-    normalized = normalize_qucs_netlist(raw_netlist, config["qucs_netlist"])
+    normalized = _prepare_external_body(raw_netlist, config)
     case_text = render_qucs_one_zone_netlist(config, plasma, raw_netlist)
     (case_directory / "qucs_source.cir").write_text(raw_netlist, encoding="utf-8")
     (case_directory / "external_normalized.inc").write_text(
