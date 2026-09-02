@@ -26,7 +26,7 @@ uv run plasma-esc-two-zone-coupled --config configs/esc_two_zone.json --output a
 uv run plasma-esc-uniformity-optimize --optimization configs/esc_uniformity_optimization.json
 ```
 
-生成途中の netlist、波形、ログは `artifacts/` に保存されます。検証済みの集計値は `reports/data/`、図とレポートは `reports/` に保存します。結果の要約は [Schmidt2018 再現レポート](reports/Schmidt2018再現レポート.md)、係数の由来は [容量規約監査](reports/Capacitance規約監査.md)、標準点外の計算は [圧力―電源振幅予測マップ](reports/PressureVoltage予測マップ.md)、二表面ESCモデルは [Wafer―Focus Ringモデル](reports/ESC_Wafer_FocusRingモデル.md)、整合設計の教材は [二入力回路最適化レポート](reports/ESC_二入力回路最適化_教育レポート.md)、横結合の極限と保存則は [二ゾーンモデル検証](reports/ESC_二ゾーンモデル検証.md)、局所粒子・電力収支との反復連成は [二ゾーン自己無撞着モデル](reports/ESC_二ゾーン自己無撞着モデル.md)、Focus電気条件によるイオン束均一化は [二ゾーン均一性最適化](reports/ESC_二ゾーン均一性最適化.md) を参照してください。
+生成途中の netlist、波形、ログは `artifacts/` に保存されます。検証済みの集計値は `reports/data/`、図とレポートは `reports/` に保存します。結果の要約は [Schmidt2018 再現レポート](reports/Schmidt2018再現レポート.md)、係数の由来は [容量規約監査](reports/Capacitance規約監査.md)、標準点外の計算は [圧力―電源振幅予測マップ](reports/PressureVoltage予測マップ.md)、二表面ESCモデルは [Wafer―Focus Ringモデル](reports/ESC_Wafer_FocusRingモデル.md)、整合設計の教材は [二入力回路最適化レポート](reports/ESC_二入力回路最適化_教育レポート.md)、横結合の極限と保存則は [二ゾーンモデル検証](reports/ESC_二ゾーンモデル検証.md)、局所粒子・電力収支との反復連成は [二ゾーン自己無撞着モデル](reports/ESC_二ゾーン自己無撞着モデル.md)、Focus電気条件によるイオン束均一化は [二ゾーン均一性最適化](reports/ESC_二ゾーン均一性最適化.md)、Qucs-S回路の導入方法は [Qucs-S netlist連成手順](reports/Qucs-S_netlistグローバルモデル連成手順.md) を参照してください。
 
 ## 数値安定化
 
