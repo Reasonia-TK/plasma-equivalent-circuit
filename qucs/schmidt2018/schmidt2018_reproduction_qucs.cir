@@ -1,0 +1,61 @@
+Schmidt et al. 2018 CCP reproduction - Qucs-S transient output
+* Frozen final operating point: Te=4.749293722676241 eV, ne=1.245160090231506e15 m^-3.
+* The circuit and plasma parameters match schmidt2018_reproduction_ngspice.cir.
+.param freq=1.3560000000000000e+07
+.param te_ev=4.7492937226762413e+00
+.param veps=5.0000000000000003e-02
+.param vcap=5.0000000000000003e-02
+.param cscale=5.8620000000000005e-01
+.param ksh1=3.5327614409870090e-19
+.param ksh2=3.1794852968883081e-18
+.param iesat1=2.9095837129930500e+00
+.param iesat2=8.7287511389791508e+00
+.func spos(x,d) {(x > 0) ? 0.5*(x+sqrt(x*x+d*d)) : 0.5*d*d/(sqrt(x*x+d*d)-x)}
+
+* The paper specifies V0*cos(omega*t); ngspice SIN uses a phase in degrees.
+Vrf src 0 SIN(0 1.0000000000000000e+02 {freq} 0 0 9.0000000000000000e+01)
+Rrf src generator_sense 5.0000000000000000e+01
+Vsense_generator generator_sense match 0
+Vsense_match_shunt match match_shunt 0
+Cmatch1 match_shunt 0 1.5500000000000000e-09
+Cmatch2 match series_c 1.7499999999999999e-10
+Lmatch series_c load_sense 1.5000000000000000e-06
+Vsense_load load_sense match_loss_in 0
+Rmatch match_loss_in load 5.0000000000000000e-01
+Vsense_plasma load plasma 0
+Vsense_stray load stray_top 0
+Cstray stray_top stray_mid 2.0000000000000001e-10
+Rstray stray_mid 0 5.0000000000000000e-01
+
+* Powered-electrode sheath.
+Csh1 plasma bulk1 C='cscale*sqrt(ksh1/sqrt(v(bulk1,plasma)*v(bulk1,plasma)+vcap*vcap))'
+Belectron1 plasma bulk1 I='iesat1*exp(-spos(v(bulk1,plasma),veps)/te_ev)'
+Iion1 bulk1 plasma DC 6.7566780916059116e-03
+
+Vsense_bulk bulk1 bulk_sense 0
+Lplasma bulk_sense bulk_mid 1.6244931020023193e-07
+Rplasma bulk_mid bulk2 9.6907121134711574e+00
+
+* Grounded-electrode sheath.
+Csh2 bulk2 0 C='cscale*sqrt(ksh2/sqrt(v(bulk2)*v(bulk2)+vcap*vcap))'
+Belectron2 0 bulk2 I='iesat2*exp(-spos(v(bulk2),veps)/te_ev)'
+Iion2 bulk2 0 DC 2.0270034274817734e-02
+
+.ic v(plasma)=0 v(bulk1)=2.8805577445842822e+01 v(bulk2)=2.8805577445842822e+01 v(bulk_mid)=2.8805577445842822e+01 v(bulk_sense)=2.8805577445842822e+01
+.options method=gear maxord=2 reltol=9.9999999999999995e-07 abstol=1.0000000000000001e-09 vntol=9.9999999999999995e-08
+
+.control
+set noaskquit
+set wr_singlescale
+set wr_vecnames
+option numdgt=15
+tran 3.0727630285152412e-10 2.2123893805309735e-05 2.0353982300884957e-05 3.0727630285152412e-10 uic
+* Qucs-S reads this transient raw file into its dataset.
+write spice4qucs.tr1.plot v(src) v(match) v(load_sense) v(plasma) v(bulk1) v(bulk2) i(Vsense_generator) i(Vsense_load) i(Vsense_match_shunt) i(Vsense_stray) i(Vsense_plasma) i(Vsense_bulk)
+* This text file is also emitted for direct numerical comparison with the reproduction runner.
+wrdata schmidt2018_waveforms.dat v(src) v(match) v(load_sense) v(plasma) v(bulk1,plasma) v(bulk2) i(Vsense_generator) i(Vsense_load) i(Vsense_match_shunt) i(Vsense_stray) i(Vsense_plasma) i(Vsense_bulk)
+destroy all
+reset
+exit
+.endc
+.end

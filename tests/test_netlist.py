@@ -22,3 +22,24 @@ def test_netlist_contains_paper_topology_and_smooth_regularization() -> None:
     assert "0 0 9.0000000000000000e+01)" in netlist
     assert "Rmatch match_loss_in load" in netlist
     assert "Vsense_plasma load plasma 0" in netlist
+
+
+def test_provided_schmidt_netlist_is_the_final_reproduction_deck() -> None:
+    final_iteration = Path(
+        "artifacts/schmidt2018/reproduction_strict/density_06/case.cir"
+    ).read_text(encoding="ascii")
+    provided = Path(
+        "qucs/schmidt2018/schmidt2018_reproduction_ngspice.cir"
+    ).read_text(encoding="ascii")
+    assert provided == final_iteration
+
+
+def test_qucs_schmidt_netlist_writes_qucs_and_text_waveforms() -> None:
+    netlist = Path(
+        "qucs/schmidt2018/schmidt2018_reproduction_qucs.cir"
+    ).read_text(encoding="ascii")
+    assert "write spice4qucs.tr1.plot" in netlist
+    assert "wrdata schmidt2018_waveforms.dat" in netlist
+    assert "v(plasma)" in netlist
+    assert "i(Vsense_generator)" in netlist
+    assert "i(Vsense_plasma)" in netlist
