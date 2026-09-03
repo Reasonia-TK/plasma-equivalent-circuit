@@ -1,5 +1,7 @@
 # プラズマ等価回路 - Schmidt et al. (2018) 再現
 
+正則化・過渡解析・グローバルモデル反復の実践資料は、[収束性改善ガイド（HTML）](reports/プラズマ等価回路_収束性改善ガイド.html)を参照してください。既存検証JSONからの再生成は `uv run python scripts/build_convergence_report.py` で行えます。
+
 Schmidt, Mussenbrock, Trieschmann, *Plasma Sources Science and Technology* 27, 105017 (2018) の Ar-CCP、外部整合回路、グローバルモデル連成を、ngspice で再現するリポジトリです。
 
 ## 前提
